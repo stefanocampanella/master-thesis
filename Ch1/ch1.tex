@@ -1,0 +1,52 @@
+\chapter{Heavy Quark and Chiral Symmetries}
+
+\section{Heavy Quark Effective Theory}
+
+There is a strong analogy between the Heavy Quark Effective Theory (HQET) and the non-relativistic limit of a Dirac spinor interacting with the electromagnetic field. Lets briefly review the latter. The Lagrangian density for such a particle is
+\begin{equation}
+  \symcal{L} = \psi^\dagger \left( \left(i \hbar \frac{\partial}{\partial t} - e \phi \right) - c \symbf{\alpha} \cdot \left(-i \hbar \symbf{\nabla} - \frac{e}{c} \symbf{A} \right) - \beta m_0 c^2 \right) \psi
+\end{equation}
+
+and the equation of motion is
+
+\begin{equation}
+  i \hbar \frac{\partial}{\partial t} \psi = \left( e \phi + c \symbf{\alpha} \cdot \left(-i \hbar \symbf{\nabla} - \frac{e}{c} \symbf{A} \right) + \beta m_0 c^2 \right) \psi \quad .
+\end{equation}
+
+Now, in order to take the non-relativistic limit, one consider a particle with four-momentum $p_\mu = m_0 c \delta_{\mu 0} + k_\mu$ where $k_\mu$ is small compared to $m_0 c$. To this end is convenient to drop out the rest-frame oscillating phase contribution and write explicitly the lower and upper spinor components.
+
+\begin{equation}
+  \psi = \exp \left( - \frac{i}{\hbar} m_0 c^2 t \right) \begin{pmatrix} \varphi \\ \chi \end{pmatrix} \quad .
+\end{equation}
+
+In terms of $\varphi$ and $\chi$ the Lagrangian becomes
+
+\begin{equation}
+\begin{split}
+  \symcal{L} = \varphi^\dagger \left(i \hbar \frac{\partial}{\partial t} - e \phi \right) \varphi + \chi^\dagger \left(i \hbar \frac{\partial}{\partial t} - e \phi - 2 m_0 c^2 \right) \chi \\ - \varphi^\dagger c \symbf{\alpha} \cdot \left(-i \hbar \symbf{\nabla} - \frac{e}{c} \symbf{A} \right) \chi - \chi^\dagger c \symbf{\alpha} \cdot \left(- i \hbar \symbf{\nabla} - \frac{e}{c} \symbf{A} \right) \varphi \quad ,
+\end{split}
+\end{equation}
+
+and the equation of motion
+
+\begin{equation}
+\begin{cases}
+  i \hbar \frac{\partial}{\partial t} \varphi - e \phi \varphi = \symbf{\sigma} \cdot \left(- i \hbar \symbf{\nabla} - \frac{e}{c} \symbf{A} \right) \chi \\
+  i \hbar \frac{\partial}{\partial t} \chi - 2 m_0 c^2 \chi - e \varphi \chi = \symbf{\sigma} \cdot \left(- i \hbar \symbf{\nabla} - \frac{e}{c} \symbf{A} \right) \varphi
+\end{cases}
+\end{equation}
+
+If $ \vert i \hbar \frac{\partial}{\partial t} \chi \vert , \vert e \phi \chi \vert  \ll \vert 2 m_0 c^2 \chi \vert $ then one can express the latter in the following way:
+
+\begin{equation}
+  \chi = - \frac{1}{2 m_0 c^2} \left[ 1 + \left( \frac{i \hbar}{2 m_0 c^2} \frac{\partial}{\partial t} - \frac{e \phi}{2 m_0 c^2} \right) + \symcal{O} \left( \frac{1}{m_0^2} \right) \right] \symbf{\sigma} \cdot \left( - i \hbar \symbf{\nabla} - \frac{e}{c} \symbf{A} \right)
+\end{equation}
+
+to the leading order the lagrangian becomes
+
+\begin{equation}
+\begin{split}
+  \symcal{L} &= \varphi^\dagger \left(i \hbar \frac{\partial}{\partial t} - e \phi \right) \varphi + \frac{1}{2 m_0 c^2} \varphi^\dagger \left( \symbf{\sigma} \cdot \left( - i \hbar \symbf{\nabla} - \frac{e}{c} \symbf{A} \right) \right)^2 \varphi \\
+  &= \varphi^\dagger \left(i \hbar \frac{\partial}{\partial t} - e \phi \right) \varphi + \frac{1}{2 m_0 c^2} \varphi^\dagger \left( - i \hbar \symbf{\nabla} - \frac{e}{c} \symbf{A} \right)^2 \varphi  - \frac{e \hbar}{c} \symbf{\sigma} \cdot \symbf{B}
+\end{split}
+\end{equation}

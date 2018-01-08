@@ -1,0 +1,33 @@
+% !TEX TS-program = lualatex
+%\batchmode
+
+\documentclass{memoir}
+
+\author{Stefano Campanella}
+\title{Spectroscopy of Charmed Hadrons: Facing the Latest Experimental Results with the Theory}
+
+\input{packages.tex}
+
+\begin{document}
+
+\frontmatter
+\pagestyle{plain}
+\input{frontmatter/frontpage.tex}
+\tableofcontents* \newpage
+%\input{frontmatter/introduction.tex}
+%\input{frontmatter/acknowledgments.tex}
+%\input{frontmatter/frontstuff.tex}
+\mainmatter
+\pagestyle{default}
+\input{Ch1/ch1.tex}
+%\input{Ch2/ch2.tex}
+%\input{Ch3/ch3.tex}
+%\input{Ch4/ch4.tex}
+%\input{Ch5/ch5.tex}
+%\input{Ch6/ch6.tex}
+%\input{Ch7/ch7.tex}
+\backmatter
+\pagestyle{plain}
+%\bibliography{bibliography}
+%\bibliographystyle{alpha}
+\end{document}

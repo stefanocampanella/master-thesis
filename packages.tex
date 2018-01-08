@@ -1,0 +1,67 @@
+\usepackage[hidelinks,plainpages=false,pdfpagelabels,pdfauthor={Stefano Campanella},pdftitle={Spectroscopy of Charmed Hadrons: Facing the Latest Experimental Results with the Theory}]{hyperref}
+
+\usepackage{mathtools,amssymb}%,amsthm}
+\usepackage{unicode-math}
+\setmainfont{STIX Two Text}
+\setmathfont{STIX Two Math}
+\usepackage{microtype}
+
+\usepackage[english]{babel}
+\usepackage[a4paper]{geometry}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\newlength\oldparindent\oldparindent=\parindent
+
+% settings per fronteretro ---> IMPORTANTE: ABILITARE PAGESTYLE IN DOCUMENT.TEX
+%%<--------
+\makeatletter % necessary for using \@chapapp
+\newcommand{\correctchaptername}{\@chapapp}
+\makeatother
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\makepagestyle{default}
+\makeevenhead{default}{\textsc{\bfseries \correctchaptername{} \thechapter}}{}{}
+\makeoddhead{default}{}{}{\textsc{\bfseries \leftmark}}
+\makeevenfoot{default}{\bfseries \thepage}{}{}
+\makeoddfoot{default}{}{}{\bfseries \thepage}
+%-------->
+
+\captionnamefont{\bfseries}
+
+% Può risolvere alcuni warning in compilazione
+%\setlength{\headheight}{14pt}
+
+% Per rimuovere indentazione usa:
+%\setlength\parindent{0pt}
+
+% Integrazioni (riferimenti, didascalia e link)
+%\usepackage[italian]{varioref}
+
+% Unità di misura (siunits obsoleto)
+%\usepackage[range-phrase={\,--\,}]{siunitx}
+
+% Tabelle (delimitatori aggiuntivi e ambienti multicolonna)
+\usepackage{booktabs}
+
+%\newtheorem{theorem}{Teorema}[chapter]
+%\newtheorem{lemma}[theorem]{Lemma}
+%\newtheorem{corollary}[theorem]{Corollario}
+%\theoremstyle{definition}
+%\newtheorem{definition}{Definizione}[chapter]
+%\newtheorem{example}{Esempio}[chapter]
+%\newtheorem{xca}{Esercizio}[chapter]
+%\theoremstyle{remark}
+%\newtheorem{remark}{Osservazione}[chapter]
+
+%\usepackage[caption = false]{subfig}
+
+% Forma convezionale corretta di parte reale e parte immaginaria
+\renewcommand{\Re}{\mathop{\mathrm{Re}}}
+\renewcommand{\Im}{\mathop{\mathrm{Im}}}
+% Forma convenzionale corretta di d (differenziale)
+\renewcommand{\d}[1]{\ensuremath{\operatorname{d}\!{#1}}}
+% definizione convenzionale corretta per differenziali di ordine n
+\newcommand{\dn}[2][]{\ensuremath{\operatorname{d^#1}\!{#2}}}
+% Derivata totale
+\newcommand{\dt}[2][]{\frac{\d{#1}}{\d{#2}}}
+% Derivata parziale
+\newcommand{\dpar}[2][]{\frac{\partial#1}{\partial#2}}
