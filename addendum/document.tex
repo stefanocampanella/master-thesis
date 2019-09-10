@@ -1,0 +1,530 @@
+\documentclass{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper]{geometry}
+\usepackage{microtype}
+\usepackage[italian]{babel}
+\usepackage{hyphenat}
+\usepackage{mathtools,amssymb,slashed,tensor}
+\usepackage{booktabs}
+
+% Adjoint
+\newcommand{\adj}[1]{\overline{#1}}
+% Average
+\newcommand{\average}[1]{\overline{#1}}
+% Trace operator
+\DeclareMathOperator{\tr}{Tr}
+% Differential operator
+\DeclareMathOperator{\D}{d}
+
+\begin{document}
+
+\section{Osservazioni Preliminari}
+
+Il punto di partenza è la definizione di simmetria in meccanica quantistica. Sia $\hat{U}$ un operatore unitario o anti-unitario che fornisce una rappresentazione infinito dimensionale (agente sullo spazio di Hilbert degli stati) di un gruppo di simmetria astratto ($SO(1,3)$, $SU(3)_C$, etc.); allora una teoria con Hamiltoniano $\hat{H}$ è invariante se $\hat{U}$ annichilisce lo stato di vuoto e
+\begin{equation}
+  [\hat{U},\hat{H}] = 0 \, .
+\end{equation}
+
+La precedente condizione si può riscrivere nel modo seguente
+\begin{equation}
+  \int \! \mathop{d^3 \! x} \hat{U} \left( : \! \dot{\hat{\phi}}(x) \hat{\pi}(x) - \mathcal{L}(\hat{\phi}(x), \hat{\pi}(x)) \! : \right) \hat{U}^{-1}  = \int \! \mathop{d^3 \! x'} \left\vert \frac{\partial x'}{\partial x} \right\vert^{-1} : \! \dot{\hat{\phi}}(x') \hat{\pi}(x') - \mathcal{L}(\hat{\phi}(x'), \hat{\pi}(x')) \! : \, .
+\end{equation}
+Tuttavia, in pratica, verifichiamo che
+\begin{equation}
+  \hat{U} \hat{\mathcal{L}}_\text{I}(\hat{\phi}(x),\partial \hat{\phi}(x)) \hat{U}^{-1} = \hat{\mathcal{L}}_\text{I}(\hat{\phi}(x'),\partial \hat{\phi}(x')) \, ,
+\end{equation}
+cioè che il termine di interazione della (densità di) Lagrangiana sia uno scalare.
+
+L'azione di $\hat{U}$ sui campi della teoria quantizzata è prescritta in analogia con il caso classico: se in quest'ultimo la legge di trasformazione è $\phi'_i (x') = \Lambda_{i j} \phi_j (x)$, in quello quantistico si postula
+\begin{equation}
+  \langle \beta' \vert \hat{\phi}_i (x') \vert \alpha' \rangle = \langle \beta \vert \Lambda_{i j} \hat{\phi}_j (x) \vert \alpha \rangle \, ,
+  \label{eq:quantum_transformation_rule}
+\end{equation}
+dove $\vert \alpha'/\beta' \rangle = \hat{U} \vert \alpha/\beta \rangle$ ed $\hat{U}$ è lineare. Da questa si ricava
+\begin{equation}
+  \hat{U} \hat{\phi}_i (x) \hat{U}^{-1} = \Lambda^{-1}_{i j} \hat{\phi}_j(x')
+\end{equation}
+
+Fanno eccezione le inversioni temporali $\hat{T}$: in questo caso gli stati iniziali e finali si scambiano e la trasformazione nel caso classico ha la forma $\phi'(t', \mathbf{x}') = T_0 K \phi(-t, \mathbf{x})$, dove $T_0$ è lineare e $K$ è l'operatore di coniugazione di complessa; pertanto la relazione postulata precedentemente va modificata nel modo seguente
+\begin{equation}
+  \langle \alpha' \vert \hat{\phi}(t', \mathbf{x}') \vert \beta' \rangle = \langle \beta \vert T_0 \hat{\phi}^\dagger(-t, \mathbf{x}) \vert \alpha \rangle \, , \\
+\end{equation}
+da cui segue
+\begin{equation}
+  \hat{T} \hat{\phi}(t,\mathbf{x}) \hat{T}^{-1} = \left( T_0^\dagger \right)^{-1} \hat{\phi}(-t, \mathbf{x}) \, . 
+\end{equation}
+con $\hat{T}$ anti-unitario (quindi anti-lineare). 
+
+Bisogna tener presente che, dal momento che $\hat{U}$ agisce sullo spazio di Hilbert degli stati, esso commuta con gli indici spinoriali e tensoriali (es. $\hat{U} \slashed{v} \hat{\phi} \hat{U}^{-1} = \slashed{v} \hat{U}^{-1} \hat{\phi} \hat{U}$); tuttavia, se esso è anti-lineare, allora $\hat{U} a \hat{\phi} \hat{U}^{-1} = a^* \hat{U} \hat{\phi} \hat{U}^{-1}$.
+
+Nel nostro caso, $\mathcal{L}_\text{I}$ descrive interazioni tra un generico doppietto pesante $T$, il doppietto fondamentale $H$ ed i mesoni vettoriali leggeri combinati nella matrice $\rho$. A questo punto, conviene scrivere la sua espressione più generale all'ordine $0$ in $1/m$\footnote{Più precisamente di ordine $0$ sia in $1/m_H$ che $1/m_T$} compatibile con le simmetrie di Lorentz\footnotemark{} \cite{article:Georgi}, interne e di quark pesante
+\begin{multline}
+  \hat{\mathcal{L}}^{(m)}_\text{I} = \int \! \mathop{d^4 v} \, \delta(v^2 -1) \theta(v_0) \frac{g_m}{\Lambda^m} \sum_{h,l,l'} \sum_{i,j,k} \left( \left. \adj{\hat{H}}(x; v) \right.^{i j}_{l h}  \left. \hat{T}^{\mu_1 \dots \mu_n}(x; v) \right.^{j k}_{h l'} \left. \Gamma\indices{_{\mu_1 \dots \mu_n}^{\nu_1 \dots \nu_m \alpha}}(v) \right.^{k i} \right. \\ \left. - \left. \adj{\hat{T}}^{\mu_1 \dots \mu_n}(x; -v) \right.^{i j}_{l h} \left. \hat{H}(x; -v) \right.^{j k}_{h l'} \left. \Gamma\indices{_{\mu_1 \dots \mu_n}^{\nu_1 \dots \nu_m \alpha}}(-v) \right.^{k i} \right) \left( i \hat{D}_{\nu_1} \dots i \hat{D}_{\nu_m} \hat{\mathcal{R}}_\alpha(x) \right)_{l' l} + (\text{ h.c. }) \, ,
+  \label{eq:most_general_int_lagrangian}
+\end{multline}
+dove $\Lambda$ è un parametro con dimensione $+1$, $\mathcal{R}_\alpha$ è la combinazione covariante $i \frac{g_V}{\sqrt{2}} \rho_\alpha - V_\alpha$ ($V$ è la corrente vettoriale associata alla simmetria globale di sapore leggero) e $h, (l,l'), (i,j,k)$ sono indici rispettivamente di sapore pesante, leggero e spinoriali. 
+\footnotetext{Tuttavia, non è chiaro come una Lagrangiana nella forma 
+\begin{equation}
+  \mathcal{L} = \int \! \frac{d^3 v}{2 v_0} \mathcal{L}_v \, ,
+  \label{eq:georgi_lagrangian}
+\end{equation}
+date le relazioni di commutazione (10) in \cite{article:Georgi} e considerati stati di campi pesanti con velocità fissata, possa fornire elementi di matrice di transizione finiti. Infatti, affinché questi siano finiti, il valore medio tra lo stato iniziale e finale di $\mathcal{L}_v$ deve essere singolare, a causa della integrazione sulle velocità.}
+
+Si fanno le seguenti osservazioni
+\begin{itemize}
+  \item $\mathbf{v}$ appare come un indice di somma continuo o parametro, dunque, fermo restando la sua interpretazione cinematica, non si trasforma.
+  \item A fissato $m$ possono corrispondere più strutture $\Gamma$, dunque più termini di interazione, ciascuno con la sua costante di accoppiamento.
+  \item Nel caso classico, l'azione (dunque la Lagrangiana) è una quantità reale, il che comporta che $\hat{\mathcal{L}}$ deve essere Hermitiano e la condizione addizionale
+    \begin{equation}
+     \gamma^0 \left( \Gamma\indices{_{\mu_1 \dots \mu_n}^{\nu_1 \dots \nu_m \alpha}}(v^\beta) \right)^\dagger \gamma^0 = \Gamma\indices{_{\mu_1 \dots \mu_n}^{\nu_1 \dots \nu_m \alpha}}(v^\beta) \, . 
+     \label{eq:herm_constraint}
+    \end{equation}
+  \item Se $\Gamma$ avesse indici di sapore romperebbe le simmetrie interne: il rovescio di questo fatto è che solo le simmetrie di ri\hyp{}parametrizzazione e dello spaziotempo (sia continue che discrete) impongono vincoli utili per la determinazione di $\Gamma$.
+\end{itemize}
+
+Per poter ricavare questi vincoli, è necessario conoscere le leggi di trasformazione di $\hat{H}$, $\hat{T}$ e $\hat{\mathcal{R}}$, le quali sono determinate dalla relazione \eqref{eq:quantum_transformation_rule}. Si considerino le trasformazioni del gruppo di Lorentz. Si ha che $\mathcal{R}$ è un vettore, pertanto 
+\begin{equation}
+  \hat{\Lambda} \hat{\mathcal{R}} (x) \hat{\Lambda}^{-1} = \Lambda^\top \hat{\mathcal{R}}(\Lambda x) \, ,
+\end{equation}
+e analogamente si può mostrare che
+\begin{equation}
+  \hat{\Lambda} \left( i D_{\nu_1} \dots i D_{\nu_m} \hat{\mathcal{R}}_\alpha (x) \right) \hat{\Lambda}^{-1} = \Lambda\indices{^{\nu'_1}_{\nu_1}} \dots \Lambda\indices{^{\nu'_m}_{\nu_m}} \Lambda\indices{^{\alpha'}_{\alpha}} \left( i D_{\nu'_1} \dots i D_{\nu'_m} \hat{\mathcal{R}}_{\alpha'} \right) (\Lambda x)
+\end{equation}
+invece su $H$ e $T$ agisce il prodotto tensoriale delle rappresentazioni rispettivamente spinoriale ed anti-spinoriale (duale della spinoriale), spinoriale e anti-tensoriale-spinoriale. Dalla definizione
+\begin{equation}
+  H_{h l}(x; v) = \frac{1 + \slashed{v}}{2} \psi_h (x) \adj{\psi}_l (x) \frac{1 - \slashed{v}}{2} \, ,
+\end{equation}
+si ricava
+\begin{equation}
+  \hat{\Lambda} \hat{H}_{h l}(x; v) \hat{\Lambda}^{-1} = \adj{\Lambda}_{\frac{1}{2}} \hat{H}_{h l}(\Lambda x; \Lambda v) \Lambda_{\frac{1}{2}} \, ,
+\end{equation}
+tenendo presente che
+\begin{align}
+  \hat{\Lambda} \hat{\psi}(x) \hat{\Lambda}^{-1} &= \adj{\Lambda}_{\frac{1}{2}} \hat{\psi}(\Lambda x) \, , \\
+  \Lambda_{\frac{1}{2}} \gamma^\mu \adj{\Lambda}_{\frac{1}{2}} &= \left( \Lambda^\top \gamma \right)^\mu \, .
+\end{align}
+Per $T$, definito come
+\begin{equation}
+  T_{h l}^{\mu_1 \dots \mu_n} (x; v) = \frac{1 + \slashed{v}}{2} \psi_h (x) \adj{A}^{\mu'_1 \dots \mu'_n}_l (x) \frac{1 - \slashed{v}}{2} \left(\eta\indices{^{\mu_1}_{\mu'_1}} - v^{\mu_1}v_{\mu'_1} \right) \dots \left(\eta\indices{^{\mu_n}_{\mu'_n}} - v^{\mu_n}v_{\mu'_n} \right)\, ,
+\end{equation}
+il calcolo è analogo e si ottiene
+\begin{equation}
+  \hat{\Lambda} \hat{T}^{\mu_1 \dots \mu_n}_{l h}(x; v) \hat{\Lambda}^{-1} = \Lambda\indices{_{\mu'_1}^{\mu_1}} \dots \Lambda\indices{_{\mu'_n}^{\mu_n}} \adj{\Lambda}_{\frac{1}{2}} \hat{T}^{\mu'_1 \dots \mu'_n}_{l h}(\Lambda x; \Lambda v ) \Lambda_{\frac{1}{2}} \, ,
+\end{equation}
+tenendo presente che
+\begin{equation}
+  \left(\eta\indices{^\mu_\nu} - v^\mu v_\nu \right) \left( \Lambda^\top \right)\indices{^\nu_\alpha} = \left( \Lambda^\top \right)\indices{^\mu_\nu} \left(\eta\indices{^\nu_\alpha} - v^{\prime \nu} v'_\alpha \right) \text{ con } v' = \Lambda v \, .
+\end{equation}
+Bisogna notare che, come effetto combinato della presenza dei proiettori di energia e delle leggi di trasformazione, i campi trasformati di $H$ e $T$ sono funzione dei vecchi campi calcolati con il nuovo valore $\mathbf{v}'$ del parametro $\mathbf{v}$.
+
+Pertanto $\Gamma$ deve soddisfare la seguente
+\begin{equation}
+  \Lambda\indices{_{\mu'_1}^{\mu_1}} \dots \Lambda\indices{_{\mu'_n}^{\mu_n}} \Lambda\indices{^{\nu'_1}_{\nu_1}} \dots \Lambda\indices{^{\nu'_m}_{\nu_m}} \Lambda\indices{^{\alpha'}_{\alpha}}   \Lambda_{\frac{1}{2}} \Gamma\indices{_{\mu_1 \dots \mu_n}^{\nu_1 \dots \nu_m \alpha}}(v)  \adj{\Lambda}_{\frac{1}{2}}  =  \Gamma\indices{_{\mu'_1 \dots \mu'_n}^{\nu'_1 \dots \nu'_m \alpha'}}(\Lambda v)
+  \label{eq:lorentz_constraint}
+\end{equation} 
+
+Le leggi per trasformazioni discrete si ricavano in maniera analoga, partendo da quelle per uno spinore \cite{book:Greiner}
+\begin{align}
+  \hat{C} \hat{\psi}(t, \mathbf{x}) \hat{C}^{-1} &= C_0 \adj{\hat{\psi}}^{\top}(t, \mathbf{x}) \quad \text{ con } C_0 = i \gamma^0 \gamma^2  \, ,\\
+  \hat{P} \hat{\psi}(t, \mathbf{x}) \hat{P}^{-1} &= P_0 \hat{\psi}(t, -\mathbf{x}) \quad \text{ con } P_0 = \gamma^0 \, , \\
+  \hat{T} \hat{\psi}(t, \mathbf{x}) \hat{T}^{-1} &= T_0 \hat{\psi}(-t, \mathbf{x}) \quad \text{ con } T_0 = i \gamma^1 \gamma^3  \, .
+\end{align}
+Da queste si ricavano le leggi di trasformazione per $\hat{H}$
+\begin{align}
+  \hat{C} \hat{H}(x^\alpha; v^\beta) \hat{C}^{-1} &= C_0 \adj{\hat{H}}^{\top}(x^\alpha; -v^\beta) C_0 \, ,\\
+  \hat{P} \hat{H}(x^\alpha; v^\beta) \hat{P}^{-1} &= P_0 \hat{H}(x_\alpha; v_\beta) P_0 \, , \\
+  \hat{T} \hat{H}(x^\alpha; v^\beta) \hat{T}^{-1} &= T_0 \hat{H}(-x_\alpha; v_\beta) T_0 \, ,
+\end{align}
+e per $\hat{T}$
+\begin{align}
+  \hat{C} \hat{T}^{\mu_1 \dots \mu_n}(x^\alpha; v^\beta) \hat{C}^{-1} &= C_0 \adj{\hat{T}}^{\top \mu_1 \dots \mu_n}(x^\alpha; -v^\beta) C_0 \, ,\\
+  \hat{P} \hat{T}^{\mu_1 \dots \mu_n}(x^\alpha; v^\beta) \hat{P}^{-1} &= P_0 \hat{T}_{\mu_1 \dots \mu_n}(x_\alpha; v_\beta) P_0 \, , \\
+  \hat{T} \hat{T}^{\mu_1 \dots \mu_n}(x^\alpha; v^\beta) \hat{T}^{-1} &= T_0 \hat{T}_{\mu_1 \dots \mu_n}(-x_\alpha; v_\beta) T_0 \, .
+\end{align}
+
+Nel caso della $\rho$, la legge di trasformazione per parità è quella per un vettore
+\begin{equation}
+  \hat{P} \hat{\rho}^\mu(x^\alpha) \hat{P}^{-1} = \hat{\rho}_\mu(x_\alpha) \, , 
+\end{equation}
+e lo stesso vale per la inversione temporale
+\begin{equation}
+  \hat{T} \hat{\rho}^\mu(x^\alpha) \hat{T}^{-1} = \hat{\rho}_\mu(-x_\alpha) \, ,
+\end{equation}
+tenendo sempre presente che, essendo $T$ anti-lineare, quando si valuta $\hat{T}^{-1} \hat{\mathcal{L}}_\text{I}(\hat{H}, \hat{T}, \hat{\rho}) \hat{T}$ bisogna complesso coniugare tutti i coefficienti numerici che compaiono nella espressione di $\hat{\mathcal{L}}_\text{I}$.
+
+Nel caso della coniugazione di carica, bisogna anche trasporre $\rho$ \cite{article:Tyutin}, che ha due indici di sapore leggero, in modo da scambiare i mesoni vettoriali con le loro antiparticelle (i mesoni sulla diagonale, $\rho^0$, $\phi$ e $\omega$, cambiano solo segno, in accordo al fatto che sono autostati di carica con autovalore $-1$)
+\begin{equation}
+  \hat{C} \hat{\rho}^\mu(x^\alpha) \hat{C}^{-1} = - \hat{\rho}^{\top \mu}(x^\alpha) \, .
+\end{equation}
+
+Infine, rimangono da chiarire due punti. Il primo è se $V$ abbia le stesse proprietà di trasformazione di $\rho$ (in particolare per coniugazione di carica), in modo che la definizione di $\mathcal{R}$ abbia senso. Il secondo è capire come si trasformi $i D^{\nu_1} \dots i D^{\nu_m} \mathcal{R}^\alpha$, dove $D$ è la derivata covariante che agisce su un oggetto covariante $X$ con due indici di sapore leggero (uno sede della rappresentazione fondamentale ed uno della sua duale)
+\begin{equation}
+  D_\mu X = \partial_\mu X + \frac{1}{2} \left[i \frac{g_V}{\sqrt{2}} \rho_\mu + V_\mu, X \right] \, .
+  \label{eq:covariant_derivative}
+\end{equation}
+
+Si tralascia la verifica del primo punto e si assume per buona la definizione di $\mathcal{R}$. Circa il secondo, si osserva che la combinazione $i \partial_\mu$ si trasforma come un vettore per trasformazioni sia continue che discrete, dunque termini del tipo $i \partial^{\nu_1} \dots i \partial^{\nu_m} \mathcal{R}^\alpha$ si trasformano come un tensore. Si può verificare per ricorsione che il termine in cui appare il commutatore in \eqref{eq:covariant_derivative} ha le corrette proprietà di trasformazione, pertanto
+\begin{align}
+  \hat{C} \left( i \hat{D}^{\nu_1} \dots i \hat{D}^{\nu_m} \hat{\mathcal{R}}^\alpha (t, \mathbf{x}) \right) \hat{C}^{-1} &= - \left( i \hat{D}^{\nu_1} \dots i \hat{D}^{\nu_m} \hat{\mathcal{R}}^\alpha (t, \mathbf{x}) \right)^\top \, ,\\
+  \hat{P} \left( i \hat{D}^{\nu_1} \dots i \hat{D}^{\nu_m} \hat{\mathcal{R}}^\alpha (t, \mathbf{x}) \right) \hat{P}^{-1} &= i \hat{D}_{\nu_1} \dots i \hat{D}_{\nu_m} \hat{\mathcal{R}}_\alpha (t, -\mathbf{x}) \, ,\\
+  \hat{T} \left( i \hat{D}^{\nu_1} \dots i \hat{D}^{\nu_m} \hat{\mathcal{R}}^\alpha (t, \mathbf{x}) \right) \hat{T}^{-1} &= i \hat{D}_{\nu_1} \dots i \hat{D}_{\nu_m} \hat{\mathcal{R}}_\alpha (-t, \mathbf{x}) \, ,\\
+\end{align}
+
+A questo punto è necessario fare una precisazione. Se nella \eqref{eq:most_general_int_lagrangian} fosse mancato il secondo termine della corrente di doppietto pesante (quello in cui compare $-v$), non sarebbe stato possibile ottenere invarianza per coniugazione di carica (come segnalato dalle leggi di trasformazione di $H$ e $T$ e dal fattore $-1$ associato a $\mathcal{R}_c$). Questo fatto ha un analogo anche in elettrodinamica, dove è necessario utilizzare la espressione anti-simmetrizzata della corrente fermionica \cite{book:Greiner} (p. 315)
+\begin{equation}
+  j^\mu = \frac{e}{2} \left[ \, \adj{\psi}, \gamma^\mu \psi \right] \, .
+  \label{eq:antisymmetrized_current}
+\end{equation}
+Infatti si trova che
+\begin{equation}
+  \hat{C} \adj{\hat{\psi}} \gamma^\mu \hat{\psi} \hat{C}^{-1} = \hat{\psi}^\top \gamma^{\mu \top} \hat{\adj{\psi}} \vphantom{\psi}^\top \neq - \adj{\hat{\psi}} \gamma^\mu \hat{\psi} \, ,
+\end{equation}
+mentre usando la \eqref{eq:antisymmetrized_current} si trova il risultato corretto. Detto questo, in QED non è necessario fare esplicitamente uso della espressione anti-simmetrizzata in quanto si trova che \cite{book:Greiner} (pp. 134-135)
+\begin{equation}
+  \hat{C} :\adj{\hat{\psi}} \gamma^\mu \hat{\psi}: \hat{C}^{-1} = - : \adj{\hat{\psi}} \gamma^\mu \hat{\psi} :  
+\end{equation}
+e, dal momento che lo Hamiltoniano è definito con prescrizione di ordinamento normale, si ottiene il risultato corretto $[\hat{C}, \hat{H}] = 0$. 
+
+Tuttavia, la prescrizione di ordinamento normale non è utile nel caso della Lagrangiana effettiva in considerazione. Infatti, per effetto dei proiettori di energia nella loro definizione, $\hat{H}(x;v)$ e $\hat{T}(x;v)$ contengono solo gradi di libertà (cioè operatori di creazione e distruzione) di particella e $\hat{H}(x;-v)$ e $\hat{T}(x;-v)$ di antiparticella. Dal momento che l'operatore di coniugazione di carica scambia particelle con antiparticelle, devono apparire entrambi i campi (cioè con $v$ e $-v$) in \eqref{eq:most_general_int_lagrangian} affinché la Lagrangiana sia uno scalare. In altri termini, bisogna utilizzare esplicitamente la corrente di doppietto pesante anti-simmetrizzata. Da un punto di vista intuitivo,  l'espressione anti-simmetrizzata in \eqref{eq:most_general_int_lagrangian} corrisponde nella analogia con la QED a considerare sia i contributi di corrente elettronica che positronica (con carica opposta). Invece, si osserva che l'inclusione dello Hermitiano coniugato in \eqref{eq:most_general_int_lagrangian} (richiesta dalla Hermitianità della Lagrangiana) non è coinvolta nella simmetria di carica; infatti, scambia operatori di creazione e distruzione associati agli stessi gradi di libertà e permette di considerare processi in cui $H$ è nello stato iniziale e $T$ nello stato finale e viceversa.
+
+In virtù delle leggi di trasformazione dei campi della teoria, si trovano le seguenti
+\begin{subequations}
+\begin{align}
+  C_0 \Gamma\indices{_{\mu_1 \dots \mu_n}^{\nu_1 \dots \nu_m \alpha}}(v^\beta) C_0 &= \left( \Gamma\indices{_{\mu_1 \dots \mu_n}^{\nu_1 \dots \nu_m \alpha}}(-v^\beta) \right)^\top \, , \\
+  P_0 \Gamma\indices{_{\mu_1 \dots \mu_n}^{\nu_1 \dots \nu_m \alpha}}(v^\beta) P_0 &= \Gamma\indices{^{\mu_1 \dots \mu_n}_{\nu_1 \dots \nu_m \alpha}}(v_\beta) \, , \\
+  T_0 \left( \Gamma\indices{_{\mu_1 \dots \mu_n}^{\nu_1 \dots \nu_m \alpha}}(v^\beta) \right)^* T_0 &= \Gamma\indices{^{\mu_1 \dots \mu_n}_{\nu_1 \dots \nu_m \alpha}}(v_\beta) \, .
+\end{align}
+\label{eq:CPT}
+\end{subequations}
+
+A questo punto è necessario considerare l'invarianza di ri\hyp{}parametrizzazione. Questa simmetria è associata alla parametrizzazione dei doppietti pesanti di momento $p^\mu$ in arbitrarie velocità fissata $\mathbf{v}$ e momento residuo $\mathbf{k}$, in modo che $p = m v + k$ ($m$ massa del doppietto pesante). La seguente osservazione è di fondamentale importanza: le componenti $0$ dei quadrivettori $v$ e $k$ sono positive e fissate dalle condizioni
+\begin{align}
+  v^2 &= 1 \, , \\
+  p^2 &= m^2 \, ,
+\end{align}
+da cui segue
+\begin{align}
+  v_0 &= \sqrt{1 + \Vert \mathbf{v} \Vert^2} \, , \\
+  \frac{k_0}{m} &= \sqrt{v_0^2 + 2 \left\Vert \mathbf{v} + \frac{\mathbf{k}}{m} \right\Vert^2 + \left\Vert \frac{\mathbf{k}}{m} \right\Vert^2} - v_0^2 \, .
+\end{align}
+I parametri $v$ e $k$ si trasformano sotto ri\hyp{}parametrizzazione di una quantità $\mathbf{q}$ nel modo seguente:
+\begin{equation}
+  (v, k) \to (v + \frac{q}{m}, k - q)  \, ,
+\end{equation}
+dove la componente $0$ di $q$ è fissata dalle condizioni precedenti, dunque
+\begin{equation}
+\left( v + \frac{q}{m} \right)^2 = 1 \, .
+\end{equation}
+Si osserva che, se le trasformazioni di ri\hyp{}parametrizzazione fossero definite in termini del generico quadrivettore $q$ invece che del vettore $\mathbf{q}$, la condizione $(v - q/m)^2 = 1$, soddisfatta per ogni $v$, implicherebbe $q = 0$.
+
+Si riassume brevemente il ragionamento in \cite{article:Luke_Manohar} per un campo pesante scalare $\phi_v$. La Lagrangiana più generale possibile\footnote{Notare che, in accordo alla precisazione precedente, la somma è sui vettori $\mathbf{v}$.} 
+\begin{equation}
+  \mathcal{L} = \sum_\mathbf{v} \mathcal{L} \left( \phi_v (x), v^\mu, i D^\mu \right) \, ,
+  \label{eq:luke_manohar_sum}
+\end{equation}
+si trasforma sotto ri\hyp{}parametrizzazione nel modo seguente
+\begin{equation}
+  \mathcal{L}' = \sum_\mathbf{v} \mathcal{L} \left( \phi_{v+q/m}, v^\mu, i D^\mu + q^\mu \right) = \sum_\mathbf{w} \mathcal{L} \left( \phi_w, w^\mu - \frac{q^\mu}{m}, i D^\mu + q^\mu \right) \, ,
+\end{equation}
+fatto da cui discende la prescrizione in \cite{article:Luke_Manohar} per cui $v^\mu$ e le derivate dei campi pesanti $D^\mu$ devono apparire nella combinazione covariante per trasformazioni di ri\hyp{}parametrizzazione
+\begin{equation}
+  \mathcal{V}^\mu = v^\mu + \frac{i D^\mu}{m} \, .
+\end{equation}
+Nel caso di campi pesanti con una struttura tensoriale o spinoriale, questi ultimi vengono ridefiniti in maniera opportuna utilizzando combinazioni di trasformazioni di Lorentz $\Lambda(p/m,u)$, nella opportuna rappresentazione (spinoriale o tensoriale), definite in modo da ruotare $u$ su $p/m$. In questo modo si ottiene che i campi ridefiniti (dove il momento $p$ appare tramite le derivate $i D$), per trasformazioni di ri\hyp{}parametrizzazione, acquistano semplicemente un fattore di fase. 
+
+Detto questo, esistono alcune difficoltà nel caso in esame. Per cominciare, il fatto che i campi di doppietto pesante a velocità fissata non vengono ottenuti con una procedura \textit{ab initio} come nel caso dei quark pesanti in HQET; in altri termini non esiste,ad esempio, una Lagrangiana per $H(x)$ ed una definizione di $H(x;v)$ in termini di $H(x)$.
+
+Nonostante questo, si può richiedere ragionevolmente che l'operatore unitario $\hat{R}(\mathbf{q}/m)$ associato alla ri\hyp{}parametrizzazione di una quantità $\mathbf{q}$ faccia corrispondere a $H(x;v)$ il campo $H(x;v+q/m)$, dunque
+\begin{equation}
+  \hat{R}\left(\frac{\mathbf{q}}{m}\right) \hat{H}(x;v) \hat{R}^{-1}\left(\frac{\mathbf{q}}{m}\right) = \hat{H}(x; v-q/m) 
+  \label{eq:reparametrization_law}
+\end{equation}
+ed analogamente per il campo di anti\hyp{}doppietto $H(x; -v)$, dove in quest'ultimo caso la legge di ri\hyp{}parametrizzazione è
+\begin{equation}
+  (-v, k) \to (-v - \frac{q}{m}, k - q) \, .
+\end{equation}
+Inoltre, la relazione tra $H(x;v-q/m)$ ed $H(x;v)$ può essere ottenuta, a partire dalla definizione di $H$, usando le trasformazioni di Lorentz $\Lambda(v,p/m)$ e $\Lambda(v',p/m)$ seguendo quanto in \cite{article:Luke_Manohar}
+\begin{equation}
+  H\left(x;v-\frac{q}{m}\right) = e^{- i q \cdot x} \Lambda_{\frac{1}{2}}\left(v-\frac{q}{m},\frac{p}{m}\right) \Lambda_{\frac{1}{2}}\left(\frac{p}{m}, v\right) H(x;v) \Lambda_{\frac{1}{2}}\left(v,\frac{p}{m}\right) \Lambda_{\frac{1}{2}}\left(\frac{p}{m}, v - \frac{q}{m}\right) 
+\end{equation}
+ed applicando la sostituzione (all'ordine opportuno in $1/m$)
+\begin{equation}
+  \frac{p^\mu}{m} \to \frac{v^\mu + i \frac{D^\mu}{m}}{\left\Vert v^\mu + i \frac{D^\mu}{m} \right\Vert} \, .
+\end{equation}
+In maniera analoga può essere fatto per $T$.
+
+Un'altra difficoltà deriva dal fatto che nella teoria che si vuole descrivere appaiono almeno due diversi doppietti di campo pesante ($T$ e $H$). Infatti, nella legge di ri\hyp{}parametrizzazione appare la massa di doppietto pesante, che sarà diversa nei due casi. Dunque, affinché la invarianza per ri\hyp{}parametrizzazione sia compatibile con la regola di super\hyp{}selezione delle velocità, non è possibile fissare indipendentemente i due momenti residui e dovrà valere
+\begin{equation}
+  \frac{\mathbf{q}_H}{m_H} = \frac{\mathbf{q}_T}{m_T} \, .
+  \label{eq:repar_momentum_constraint}
+\end{equation}
+
+Con queste precisazioni, è possibile ridefinire i campi di doppietto pesante in modo che acquistino semplicemente una fase per trasformazioni di ri\hyp{}parametrizzazione
+\begin{align}
+  \mathcal{H}(x; v) &= \Lambda_{\frac{1}{2}} \left(\frac{p}{m_H}, v\right) H(x; v) \Lambda_{\frac{1}{2}} \left(v, \frac{p}{m_H}\right) \, , \\ 
+  \mathcal{T}^{\mu_1 \dots \mu_n}(x; v) &= \Lambda\indices{^{\mu_1}_{\mu'_1}}\left(\frac{p}{m_H}, v\right) \dots \Lambda\indices{^{\mu_n}_{\mu'_n}}\left(\frac{p}{m_H}, v\right)  \Lambda_{\frac{1}{2}} \left(\frac{p}{m_H}, v\right) \left( T^{\mu'_1 \dots \mu'_n}(x; v) \right) \Lambda_{\frac{1}{2}} \left(v, \frac{p}{m_H}\right) \, .
+\end{align}
+In questo modo si può ripercorrere il ragionamento di \cite{article:Luke_Manohar} senza problemi e concludere che $\Gamma$ deve dipendere da $\mathcal{V}$ e non da $v$. Pertanto la nuova Lagrangiana sarà nella forma (utilizzando una notazione leggermente più compatta)
+\begin{multline}
+  \hat{\mathcal{L}}^{(m)}_\text{I} = \int \! \mathop{d^4 v} \, \delta(v^2 -1) \theta(v_0) \frac{g_m}{\Lambda^m} \tr \left( \adj{\hat{\mathcal{H}}}(x; \mathcal{V}) \hat{\mathcal{T}}^{\mu_1 \dots \mu_n}(x; \mathcal{V}) \Gamma\indices{_{\mu_1 \dots \mu_n}^{\nu_1 \dots \nu_m \alpha}}(\mathcal{V}) i \hat{D}_{\nu_1} \dots i \hat{D}_{\nu_m} \hat{\mathcal{R}}_\alpha(x) \right) \\ - \tr \left( \adj{\hat{\mathcal{H}}}(x; -\mathcal{V}) \hat{\mathcal{T}}^{\mu_1 \dots \mu_n}(x; -\mathcal{V}) \Gamma\indices{_{\mu_1 \dots \mu_n}^{\nu_1 \dots \nu_m \alpha}}(-\mathcal{V}) i \hat{D}_{\nu_1} \dots i \hat{D}_{\nu_m} \hat{\mathcal{R}}_\alpha(x) \right)  + (\text{ h.c. }) \, ,
+\end{multline}
+
+Ma a questo punto si ricorda che la Lagrangiana di interazione che si vuole costruire è di ordine $0$ in $1/m$. A quest'ordine i campi pesanti ridefiniti coincidono con le loro versioni non-covarianti per ri\hyp{}parametrizzazione
+\begin{align}
+  \mathcal{H}(x;v) &= H(x;v) + \mathcal{O}\left(\frac{1}{m}\right) \, , \\
+  \mathcal{T}^{\mu_1 \dots \mu_n}(x;v) &= T^{\mu_1 \dots \mu_n}(x;v) + \mathcal{O}\left(\frac{1}{m}\right) \, , 
+\end{align}
+e la Lagrangiana più generale possibile non potrà contenere derivate di questi ultimi (che è l'ansatz fatto in partenza nella \eqref{eq:most_general_int_lagrangian}), dunque $\Gamma$ torna a dipendere solo da $v$. Il nodo della questione è che ora l'invarianza per ri\hyp{}parametrizzazione richiede che
+\begin{equation}
+  \Gamma\indices{_{\mu_1 \dots \mu_n}^{\nu_1 \dots \nu_m \alpha}}(v) = \Gamma\indices{_{\mu_1 \dots \mu_n}^{\nu_1 \dots \nu_m \alpha}}\left( v - \frac{q}{m} \right) = \Gamma\indices{_{\mu_1 \dots \mu_n}^{\nu_1 \dots \nu_m \alpha}}\left( v \right) + \mathcal{O}\left(\frac{1}{m}\right) \, , 
+\end{equation}
+dunque, all'ordine zero in $1/m$, questa relazione non fornisce un vincolo utile per la determinazione di $\Gamma$. Nonostante questo, si è preferito esaminare l'invarianza per ri\hyp{}parametrizzazione in dettaglio per verificare che il caso dei campi di doppietto pesante non costituisce una eccezione rispetto alle considerazioni in \cite{article:Luke_Manohar} ed evidenziare alcuni punti concettualmente rilevanti (es. la condizione \eqref{eq:repar_momentum_constraint}).
+
+\section{Calcolo delle Larghezze di Decadimento}
+
+Le equazioni \eqref{eq:herm_constraint}, \eqref{eq:lorentz_constraint} e \eqref{eq:CPT}, costituiscono i vincoli disponibili per stabilire le strutture possibili di $\Gamma$. Si sottolinea la seguente: si consideri il tensore $\Gamma$ avente $n+m+1$ indici contro\hyp{}varianti $\lambda_i$, allora è semplice mostrare che la forma più generale per \Gamma compatibile con tutti vincoli è la seguente
+\begin{equation}
+  \Gamma^{\lambda_1 \dots \lambda_{n+m+1}} = \chi^{\lambda_1} \dots \chi^{\lambda_{n+m+1}} \text{ con } \chi^\lambda = v^\lambda, \gamma^\lambda \, .
+\end{equation}
+In linea di principio sarebbe potuto apparire nella struttura $\Gamma$ il tensore metrico $\eta^{\lambda_i \lambda_j}$, tuttavia quest'ultimo coincide sia con la parte scalare di $\gamma^{\lambda_i} \gamma^{\lambda_j}$ che di $v^{\lambda_i} v^{\lambda_j}$.
+
+Inoltre, nel calcolo, si potrà tener conto delle seguenti proprietà di $T$:
+\begin{itemize}
+  \item $T$ è completamente simmetrico ed a traccia nulla (ovvero è un tensore puro), 
+  \item le contrazioni di un indice $\mu$ con $v$ o $\gamma$ sono nulle (trasversalità di $T$)
+\end{itemize}
+e di $\mathcal{R}$ (nei processi ad albero considerati):
+\begin{itemize}
+  \item $\mathcal{R}$ coincide con $\rho$
+  \item $i D_{\nu_1} \dots i D_{\nu_m}$ coincide con $i \partial_{\nu_1} \dots i \partial_{\nu_m}$ e gli indici $\nu$ sono completamente simmetrici,
+  \item le contrazioni di un indice $\nu$ con $\alpha$ sono nulle (trasversalità di $\rho$).
+\end{itemize}
+Comunque si osserva che, ad esempio, le proprietà di simmetria di $T^{\mu_1 \dots \mu_n}$ non costituiscono dei vincoli per $\Gamma$ ed al più permettono di escludere a priori particolari strutture che, se considerate esplicitamente, non contribuiscono alle larghezze di decadimento\footnote{Tuttavia contribuiscono nelle ampiezze e, quando questi contributi vengono saturati con i tensori di polarizzazione, essi si annullano}.
+
+Si considera a posteriori il problema sulla necessità di includere o meno il tensore di campo di $\rho$
+\begin{equation}
+  F^{\mu \nu} = \partial_\mu \rho_\nu - \partial_\nu \rho_\mu + i \frac{g_V}{2} \left[ \rho_\mu , \rho_\nu \right] \, ,
+\end{equation}
+nella espressione della Lagrangiana di interazione più generale possibile. Questo tensore è necessariamente richiesto nel termine di pura gauge della Lagrangiana, dove fornisce il termine cinetico quadratico nelle derivate di $\rho$ ed il termine di interazione corrispondente al vertice con tre campi $\rho$. Si riporta questo termine di pura gauge citando quanto in \cite{article:Casalbuoni} ed adattandolo alla notazione qui usata
+\begin{equation}
+  \mathcal{L}_\rho = - \frac{1}{4} \tr \left( F^{\alpha \beta} F_{\alpha \beta} \right) - \frac{a f_\pi }{2} \tr \left( \mathcal{R}^2 \right) \, ,
+\end{equation}
+dove è stato incluso il termine quadratico in $\mathcal{R}$ (che contiene il termine di massa per $\rho$), fra l'altro responsabile delle relazioni KSFR.
+Il tensore di campo $F$ è per definizione covariante per trasformazioni del gruppo di simmetria (nascosta) locale, come per qualsiasi altra teoria di gauge non-Abeliana. Tuttavia, diversamente da una generica teoria di gauge non-Abeliana, in quella in considerazione si ha a disposizione il campo composto $\mathcal{R}$, anch'esso covariante, oltre che lineare e privo di derivate di $\rho$. La conseguenza più eclatante di questo fatto è possibile costruire una Lagrangiana tale che il campo di gauge $\rho$ abbia massa e senza rompere l'invarianza per trasformazioni di gauge. La seconda conseguenza più rilevante è che è possibile costruire termini di interazione in cui compare il campo fondamentale $\rho$ (all'interno di $\mathcal{R}$) e le sue derivate. Anche se questo fatto non ha un analogo nelle usuali teorie di gauge non-Abeliane, è anche vero che la prescrizione di accoppiamento minimale coinvolge il campo di gauge, non il suo tensore di campo.
+
+Queste considerazioni sono in accordo al termine di interazione della Lagrangiana (4.3) in \cite{article:Casalbuoni} in cui non compare $F$, bensì $\rho$.
+
+Inoltre, vale la seguente considerazione: dalla relazione esatta
+\begin{equation}
+  i D_{\left[ \alpha \right.} \rho_{\left. \beta \right]} = - \frac{g_V}{2 \sqrt{2}} F_{\alpha \beta} + \frac{i}{2} \left( \partial_\alpha V_\beta - \partial_\beta V_\alpha +  \left[ V_\alpha , V_\beta \right] \right) \, ,
+\end{equation} 
+segue che, nel calcolo dei processi considerati, $F_{\alpha \beta}$ è semplicemente proporzionale alla parte antisimmetrica di $i D_\alpha \mathcal{R}_\beta$. Pertanto, se si includono termini con operatori di dimensione $m$ per $\mathcal{R}$ ed $m-1$ per $F$ (ovvero con rispettivamente $m$ ed $m-1$ derivate), si contano due volte i contributi di antisimmetrici derivanti da $i \partial \rho$.
+
+\begin{table}
+  \centering
+  \begin{tabular}{ccccccc}
+    \toprule
+    Doppietto      & $H$ & $S$ & $T$ & $X$ & $X'$ & $F$ \\
+    \midrule
+    $m_\text{min}$ &  1  &  0  &  2  &  1  &  3   &  2  \\
+    \bottomrule
+  \end{tabular}
+  \caption{Valori minimi di $m$ per ogni doppietto riferiti a strutture contenenti solo matrici $\gamma$.}
+  \label{tab:m}
+\end{table}
+
+Da una verifica diretta, per avere larghezze di decadimento fisicamente consentite non nulle ad albero, bisogna considerare strutture fino ad un certo valore minimo di $m$ per ciascun doppietto (nella tabella \ref{tab:m} sono state considerate strutture contenenti solo matrici $\gamma$, pertanto questi valori sono possibilmente sovrastimati). Nel seguito si considerano i decadimenti di doppietti con $S_\ell = \frac{1}{2}$.
+
+\paragraph{Decadimenti di $S$}
+Conviene partire dal caso più semplice, ovvero per il doppietto $S$ che ha valore minimo $m = 0$. In questo caso le strutture per $\Gamma$ sono solo due ed è possibile includerle nella espressione di $\tilde{\Gamma}$ che contiene anche le costanti di accoppiamento
+\begin{equation}
+  \tilde{\Gamma}^\alpha = g_{0,1} v^\alpha + g_{0,2} \gamma^\alpha \, .
+\end{equation}
+Dalla precedente si ottengono le seguenti larghezze di decadimento, dove $\mathbf{q}$ è l'impulso del vettore leggero nello stato finale.
+\begin{align}
+  \Gamma\left( P^*_0 \to P^* V \right) =& \frac{m_{P^*} \Vert \mathbf{q} \Vert}{2 \pi  m_{P_0^*} m_V^2} g_{0,2}^2 \left(3 m_V^2+ \Vert \mathbf{q} \Vert^2\right) \, , \\
+  \Gamma\left( P'_1 \to P V \right) =& \frac{m_P \Vert \mathbf{q} \Vert}{6 \pi  m_V^2 m_{P'_1}} g_{0,2}^2 \left(3 m_V^2+ \Vert \mathbf{q} \Vert^2\right) \, , \\
+  \Gamma\left( P'_1 \to P^* V \right) =& \frac{m_{P^*} \Vert \mathbf{q} \Vert }{3 \pi  m_V^2 m_{P'_1}} g_{0,2}^2 \left(3 m_V^2+ \Vert \mathbf{q} \Vert^2\right) \, . 
+\end{align}
+Come si vede, in questo caso particolare, la struttura con $v$ non contribuisce.
+
+\paragraph{Decadimenti di $\tilde{H}$}
+Si passa ora al caso leggermente più complicato di $\tilde{H}$. In questo caso $m_\text{min} = 1$, pertanto le strutture necessarie ad ottenere larghezze non nulle saranno del tipo
+\begin{align}
+  \tilde{\Gamma}^\alpha &= g_{0,1} v^\alpha + g_{0,2} \gamma^\alpha \, , \\
+  \Gamma^{\nu \alpha} &= g_{1,1} v^\nu v^\alpha + g_{1,2} \gamma^\nu v^\alpha + g_{1,3} v^\nu \gamma^\alpha + g_{1,4} \gamma^\nu \gamma^\alpha \, .
+\end{align}
+
+Utilizzando queste strutture è possibile effettuare i calcoli e si ottiene
+\begin{align}
+  \Gamma\left( \tilde{P} \to P V \right) &=  \frac{\Vert \mathbf{q} \Vert^3 m_P}{2 \pi \Lambda^2 m_V^2 m_{\tilde{P}}} \left(\Lambda \left(g_{0,1}-g_{0,2}\right)+\left(-g_{1,1}+g_{1,2}+g_{1,3}\right) \sqrt{m_V^2+\Vert \mathbf{q}\Vert^2}\right)^2\, , \\
+  \Gamma\left( \tilde{P} \to P^* V \right) &= \frac{m_{P^*} \Vert \mathbf{q} \Vert^3}{\pi  \Lambda ^2 m_{\tilde{P}}} g_{1,4}^2 \, , \\
+  \Gamma\left( \tilde{P}^* \to P V \right) &= \frac{m_P \Vert \mathbf{q} \Vert^3}{3 \pi  \Lambda ^2 m_{\tilde{P}^*}} g_{1,4}^2 \, , 
+\end{align}
+\begin{multline}
+  \Gamma\left( \tilde{P}^* \to P^* V \right) = \frac{\Vert\mathbf{q}\Vert^3 m_{P^*}}{6 \pi \Lambda ^2 m_V^2 m_{\tilde{P}^*}} \Bigg(3 \Lambda \left(g_{0,1}-g_{0,2}\right)  \\
+    \left(\Lambda \left( g_{0,1}-g_{0,2}\right)+2 \left(-g_{1,1}+g_{1,2}+g_{1,3}\right) \sqrt{m_V^2+\Vert\mathbf{q}\Vert^2}\right) \\
+ + \left(3 \left(-g_{1,1}+g_{1,2}+g_{1,3}\right){}^2+4 g_{1,4}^2\right) m_V^2+3 \Vert\mathbf{q}\Vert^2 \left(-g_{1,1}+g_{1,2}+g_{1,3}\right)^2\Bigg)
+\end{multline}
+Dunque le due strutture con $m=0$ danno gli stessi contributi. Inoltre, circa le strutture con $m = 1$, appaiono espressioni che contengono combinazioni delle costanti di accoppiamento. Questo deriva da ridondanze e mescolamenti di strutture con proprietà di simmetria degli indici differenti. Infatti si ha che
+\begin{align}
+  v^\alpha v^\beta &= \left( v^\alpha v^\beta - g^{\alpha \beta} \right) + g^{\alpha \beta} \, , \\
+  v^\alpha \gamma^\beta &= \frac{1}{2} \left( v^\alpha \gamma^\beta - v^\beta \gamma^\alpha \right) + \left( \frac{1}{2} \left( v^\alpha \gamma^\beta + v^\beta \gamma^\alpha \right) - \slashed{v} \eta^{\alpha \beta} \right) + \slashed{v} \eta^{\alpha \beta} \, ,\\
+  \gamma^\alpha \gamma^\beta &= 2 i \sigma^{\alpha \beta} + \eta^{\alpha \beta} \, .
+\end{align}
+Dunque si ridefinisce $\tilde{\Gamma}^{\nu \alpha}$ in modo che le costanti di accoppiamento moltiplichino strutture con proprietà definite di simmetria ed evitando ridondanze
+\begin{multline}
+  \tilde{\Gamma}^{\nu \alpha} = g_{1,1} \eta^{\nu \alpha} + g_{1,2} \slashed{v} \eta^{\nu \alpha} + g_{1,3} \left( v^\alpha v^\beta - g^{\alpha \beta} \right) + g_{1,4} \frac{1}{2} \left( v^\alpha \gamma^\beta + v^\beta \gamma^\alpha \right) \\ + g_{1,5} \frac{1}{2} \left( v^\alpha \gamma^\beta - v^\beta \gamma^\alpha \right) + g_{1,6} 2 i \sigma^{\nu \alpha}  \, 
+\end{multline}
+dove, per comodità di notazione, sono stati usati gli stessi simboli per le costanti di accoppiamento.
+Espresse in termini del nuovo $\tilde{\Gamma}$ si trovano le seguenti larghezze
+\begin{align}
+  \Gamma\left( \tilde{P} \to P V \right) &= \frac{\Vert\mathbf{q}\Vert^3}{2 \pi \Lambda^2 m_V^2 m_{\tilde{P}}} m_P \left(\Lambda \left(g_{0,1}-g_{0,2}\right)+\left(g_{1,4}-g_{1,3}\right) \sqrt{m_V^2+\Vert\mathbf{q}\Vert^2}\right)^2 \, , \\
+  \Gamma\left( \tilde{P} \to P^* V \right) &= \frac{m_{P^*} \Vert \mathbf{q} \Vert^3}{\pi  \Lambda ^2 m_{\tilde{P}}} g_{1,6}^2 \, , \\
+  \Gamma\left( \tilde{P}^* \to P V \right) &= \frac{m_P \Vert \mathbf{q} \Vert^3}{3 \pi  \Lambda ^2 m_{\tilde{P}^*}} g_{1,6}^2 \, ,
+\end{align}
+\begin{multline}
+  \Gamma\left( \tilde{P}^* \to P^* V \right) = \frac{\Vert\mathbf{q}\Vert^3 m_{P^*}}{6 \pi \Lambda^2 m_V^2 m_{\tilde{P}^*}} \Bigg(3 \Lambda \left(g_{0,1}-g_{0,2}\right) \left(\Lambda \left( g_{0,1}-g_{0,2}\right)+2 \left(g_{1,4}-g_{1,3}\right) \sqrt{m_V^2+\Vert\mathbf{q}\Vert^2}\right) \\
+  +\left(3 \left(g_{1,3}-g_{1,4}\right){}^2+4 g_{1,6}^2\right) m_V^2+3 \Vert\mathbf{q}\Vert^2 \left(g_{1,3}-g_{1,4}\right)^2\Bigg)\, .
+\end{multline}
+Benché le loro espressioni non si siano molto semplificate, da queste ultime è possibile fare una lettura più immediata della situazione. Anzitutto gli scalari non contribuiscono (come atteso). Invece, le strutture simmetriche in $v \gamma$ e $v v$ danno gli stessi contributi e, tra quelle antisimmetriche, quella mista in $v \gamma$ non contribuisce, mentre quella in $\gamma \gamma$ è la sola responsabile dei decadimenti $\Gamma\left( \tilde{P} \to P^* V \right)$ e $\Gamma\left( \tilde{P}^* \to P V \right)$. Infine, si nota l'esistenza di un termine di interferenza tra le strutture simmetriche e quella antisimmetrica in $\gamma \gamma$ nel decadimento $\Gamma\left( \tilde{P}^* \to P^* V \right)$.
+
+Tuttavia si osserva che questo tipo di analisi è via via più difficile per strutture più complesse, dovendo considerare tensori $\Gamma$ con sempre più indici e ridurre le diverse combinazioni (corrispondenti alle diverse possibili sostituzioni di $v$ e $\gamma$) al numero minimo di oggetti distinti con proprietà tensoriali definite. Pertanto, per valori di $n$ e $m$ maggiori, è probabilmente più fattibile considerare semplicemente le possibili stringhe di $v$ e $\gamma$.
+%Riporto di seguito le possibili strutture per
+%\begin{equation}
+%  \mathcal{G}_{\mu_1 \dots \mu_n} =  \sum_{m,k} \frac{g_{m,k}}{\Lambda^m} \; \Gamma\indices{^{(k)}_{\mu_1 \dots \mu_n}^{\nu_1 \dots \nu_m \alpha}} i \partial_{\nu_1} \dots i \partial_{\nu_m} \rho_\alpha \, ,
+%\end{equation}
+%fino al valore minimo di $m$ considerato (si sottintende che le costanti di accoppiamento siano diverse per ogni doppietto) e le corrispondenti larghezze di decadimento, dove $q$ è l'impulso del vettore leggero nello stato finale.
+%
+%\paragraph{Decadimenti di $\tilde{H}$}
+%\begin{equation}
+%  \mathcal{G} = g_0 \slashed{\rho} + \frac{g_1}{\Lambda} i \slashed{\partial}\slashed{\rho} \, ,
+%\end{equation}
+%
+%\begin{align}
+%  \Gamma\left( \tilde{P} \to P V \right) &= \frac{m_P \Vert \mathbf{q} \Vert^3}{2 \pi m_V^2 m_{\tilde{P}}} g_0^2 \, , \\
+%  \Gamma\left( \tilde{P} \to P^* V \right) &= \frac{m_{P^*} \Vert \mathbf{q} \Vert^3}{\pi  \Lambda ^2 m_{\tilde{P}}} g_1^2 \, , \\
+%  \Gamma\left( \tilde{P}^* \to P V \right) &= \frac{m_P \Vert \mathbf{q} \Vert^3}{3 \pi  \Lambda ^2 m_{\tilde{P}^*}} g_1^2 \, , \\
+%  \Gamma\left( \tilde{P}^* \to P^* V \right) &= \frac{m_{P^*} \Vert \mathbf{q} \Vert^3}{6 \pi  \Lambda ^2 m_V^2 m_{\tilde{P}^*}} \left(3 g_0^2 \Lambda ^2+4 g_1^2 m_V^2\right) \, .
+%\end{align}
+%
+%\paragraph{Decadimenti di $S$}
+%\begin{equation}
+%  \mathcal{G} = g_0 \slashed{\rho} \, , 
+%\end{equation}
+%
+%\begin{align}
+%  \Gamma\left( P^*_0 \to P^* V \right) =& \frac{m_{P^*} \Vert \mathbf{q} \Vert}{2 \pi  m_{P_0^*} m_V^2} g_0^2 \left(3 m_V^2+ \Vert \mathbf{q} \Vert^2\right) \, , \\
+%  \Gamma\left( P'_1 \to P V \right) =& \frac{m_P \Vert \mathbf{q} \Vert}{6 \pi  m_V^2 m_{P'_1}} g_0^2 \left(3 m_V^2+ \Vert \mathbf{q} \Vert^2\right) \, , \\
+%  \Gamma\left( P'_1 \to P^* V \right) =& \frac{m_{P^*} \Vert \mathbf{q} \Vert }{3 \pi  m_V^2 m_{P'_1}} g_0^2 \left(3 m_V^2+ \Vert \mathbf{q} \Vert^2\right) \, . 
+%\end{align}
+%
+%\paragraph{Decadimenti di $T^\mu$}
+%\begin{equation}
+%  \mathcal{G}_\mu = g_0 \rho_\mu + \frac{g_{1,1}}{\Lambda} i \slashed{\partial} \rho_\mu + \frac{g_{1,2}}{\Lambda} i \partial_\mu \slashed{\rho} + \frac{g_{2,1}}{\Lambda^2} \left( i \partial \right)^2 \rho_\mu + \frac{g_{2,2}}{\Lambda^2} \frac{1}{2} \left( i \partial_\mu i \slashed{\partial} + i \slashed{\partial} i \partial_\mu \right) \slashed{\rho} \, ,
+%\end{equation}
+%
+%\begin{multline}
+%  \Gamma\left( P_1 \to P V \right) = \frac{\Vert \mathbf{q} \Vert m_P }{18 \pi  \Lambda ^4 m_{P_1} m_V^2}
+%  \Bigg( (2 \Lambda ^2 g_{1,1}^2 \left(m_V^2+\Vert \mathbf{q} \Vert^2\right) \left(3 m_V^2+\Vert \mathbf{q} \Vert^2\right) \\
+%  -4 g_0 \Lambda ^2 \left(\Lambda  \sqrt{m_V^2+\Vert \mathbf{q} \Vert^2} \left(3 g_{1,1} m_V^2+\Vert \mathbf{q} \Vert^2 \left(g_{1,1}+g_{1,2}\right)\right)-g_{2,1} m_V^2 \left(3 m_V^2+\Vert \mathbf{q} \Vert^2\right)+\Vert \mathbf{q} \Vert^2 \left(-g_{2,2}\right) m_V^2\right) \\
+% +\Vert \mathbf{q} \Vert^4 \left(2 \Lambda ^2 g_{1,2}^2+g_{2,2}^2 m_V^2\right)-4 \Lambda  \Vert \mathbf{q} \Vert^2 g_{1,2} g_{2,1} m_V^2 \sqrt{m_V^2+\Vert \mathbf{q} \Vert^2} \\
+% +4 \Lambda  g_{1,1} \left(\Lambda  \Vert \mathbf{q} \Vert^2 g_{1,2} \left(m_V^2+\Vert \mathbf{q} \Vert^2\right)-m_V^2 \sqrt{m_V^2+\Vert \mathbf{q} \Vert^2} \left(g_{2,1} \left(3 m_V^2+\Vert \mathbf{q} \Vert^2\right)+\Vert \mathbf{q} \Vert^2 g_{2,2}\right)\right) \\
+% +2 g_{2,1}^2 m_V^4 \left(3 m_V^2+\Vert \mathbf{q} \Vert^2\right)+4 \Vert \mathbf{q} \Vert^2 g_{2,1} g_{2,2} m_V^4+2 g_0^2 \Lambda ^4 \left(3 m_V^2+\Vert \mathbf{q} \Vert^2\right)\Bigg) \, ,
+%\end{multline}
+%
+%\begin{multline}
+%  \Gamma\left( P_1 \to P^* V \right) = \frac{\Vert \mathbf{q} \Vert m_{P^*}}{18 \pi  \Lambda ^4 m_{P_1} m_V^2}
+%  \Bigg(\Lambda ^2 g_{1,1}^2 \left(m_V^2+\Vert \mathbf{q} \Vert^2\right) \left(3 m_V^2+\Vert \mathbf{q} \Vert^2\right) \\
+%  +2 g_0 \Lambda ^2 \left(-\Lambda  \sqrt{m_V^2+\Vert \mathbf{q} \Vert^2} \left(3 g_{1,1} m_V^2+\Vert \mathbf{q} \Vert^2 \left(g_{1,1}+g_{1,2}\right)\right)+g_{2,1} m_V^2 \left(3 m_V^2+\Vert \mathbf{q} \Vert^2\right)+\Vert \mathbf{q} \Vert^2 g_{2,2} m_V^2\right) \\
+%  +\Vert \mathbf{q} \Vert^4 \left(\Lambda ^2 g_{1,2}^2+5 g_{2,2}^2 m_V^2\right)-2 \Lambda  \Vert \mathbf{q} \Vert^2 g_{1,2} g_{2,1} m_V^2 \sqrt{m_V^2+\Vert \mathbf{q} \Vert^2} \\
+%  +2 \Lambda  g_{1,1} \left(\Lambda  \Vert \mathbf{q} \Vert^2 g_{1,2} \left(m_V^2+\Vert \mathbf{q} \Vert^2\right)-m_V^2 \sqrt{m_V^2+\Vert \mathbf{q} \Vert^2} \left(g_{2,1} \left(3 m_V^2+\Vert \mathbf{q} \Vert^2\right)+\Vert \mathbf{q} \Vert^2 g_{2,2}\right)\right) \\
+%  +g_{2,1}^2 m_V^4 \left(3 m_V^2+\Vert \mathbf{q} \Vert^2\right)+2 \Vert \mathbf{q} \Vert^2 g_{2,1} g_{2,2} m_V^4+g_0^2 \Lambda ^4 \left(3 m_V^2+\Vert \mathbf{q} \Vert^2\right)\Bigg) \, ,
+%\end{multline}
+%
+%\begin{equation}
+%  \Gamma\left( P^*_2 \to P V \right) = \frac{\Vert \mathbf{q} \Vert^5 m_P}{10 \pi  \Lambda ^4 m_{P_2^*}} g_{2,2}^2 \, ,
+%\end{equation}
+%
+%\begin{multline}
+%  \Gamma\left( P^*_2 \to P^* V \right) = \frac{\Vert \mathbf{q} \Vert m_{P^*}}{30 \pi  \Lambda ^4 m_{P_2^*} m_V^2}
+%  \Bigg(5 \Lambda ^2 g_{1,1}^2 \left(m_V^2+\Vert \mathbf{q} \Vert^2\right) \left(3 m_V^2+\Vert \mathbf{q} \Vert^2\right) \\
+%    -10 g_0 \Lambda ^2 \left(\Lambda  \sqrt{m_V^2+\Vert \mathbf{q} \Vert^2} \left(3 g_{1,1} m_V^2+\Vert \mathbf{q} \Vert^2 \left(g_{1,1}+g_{1,2}\right)\right)-g_{2,1} m_V^2 \left(3 m_V^2+\Vert \mathbf{q} \Vert^2\right)+\Vert \mathbf{q} \Vert^2 \left(-g_{2,2}\right) m_V^2\right) \\
+%  +\Vert \mathbf{q} \Vert^4 \left(5 \Lambda ^2 g_{1,2}^2+7 g_{2,2}^2 m_V^2\right)-10 \Lambda  \Vert \mathbf{q} \Vert^2 g_{1,2} g_{2,1} m_V^2 \sqrt{m_V^2+\Vert \mathbf{q} \Vert^2} \\
+%  +10 \Lambda  g_{1,1} \left(\Lambda  \Vert \mathbf{q} \Vert^2 g_{1,2} \left(m_V^2+\Vert \mathbf{q} \Vert^2\right)-m_V^2 \sqrt{m_V^2+\Vert \mathbf{q} \Vert^2} \left(g_{2,1} \left(3 m_V^2+\Vert \mathbf{q} \Vert^2\right)+\Vert \mathbf{q} \Vert^2 g_{2,2}\right)\right) \\
+%+5 g_{2,1}^2 m_V^4 \left(3 m_V^2+\Vert \mathbf{q} \Vert^2\right)+10 \Vert \mathbf{q} \Vert^2 g_{2,1} g_{2,2} m_V^4+5 g_0^2 \Lambda ^4 \left(3 m_V^2+\Vert \mathbf{q} \Vert^2\right)\Bigg) \, .
+%\end{multline}
+%
+%\paragraph{Decadimenti di $X^\mu$}
+%\begin{equation}
+%  \mathcal{G}_\mu = g_0 \rho_\mu + \frac{g_{1,1}}{\Lambda} i \slashed{\partial} \rho_\mu + \frac{g_{1,2}}{\Lambda} i \partial_\mu \slashed{\rho} \, ,
+%\end{equation}
+%
+%\begin{align}
+%  \Gamma\left( P^*_1 \to P V \right) &= \frac{\Vert \mathbf{q} \Vert^3 \left(g_{1,1}-g_{1,2}\right)^2 m_P}{18 \pi  \Lambda ^2 m_{P_1^*}} \, , \\
+%  \Gamma\left( P^*_1 \to P^* V \right) &= \frac{\Vert \mathbf{q} \Vert^3 m_{P^*}}{18 \pi  \Lambda^2 m_{P_1^*} m_V^2} \left(2 \left(4 g_{1,1}^2+7 g_{1,2} g_{1,1}+4 g_{1,2}^2\right) m_V^2+3 \Vert \mathbf{q} \Vert^2 \left(g_{1,1}+g_{1,2}\right)^2\right) \, , \\
+%  \Gamma\left( P_2 \to P V \right) &= \frac{\Vert\mathbf{q}\Vert^3 m_P}{30 \pi \Lambda ^2 m_{P_2} m_V^2} \left(g_{1,1}+g_{1,2}\right)^2 \left(5 m_V^2+2 \Vert\mathbf{q}\Vert^2\right)  \, , \\
+%  \Gamma\left( P_2 \to P^* V \right) &= \frac{\Vert\mathbf{q}\Vert^3 m_{P^*} }{30 \pi \Lambda^2 m_{P_2} m_V^2} \left(10 \left(g_{1,1}^2+g_{1,2} g_{1,1}+g_{1,2}^2\right) m_V^2+3 \Vert\mathbf{q}\Vert^2 \left(g_{1,1}+g_{1,2}\right)^2\right) \, . 
+%\end{align}
+%
+%\paragraph{Decadimenti di $X'^{\mu \nu}$}
+%\begin{multline}
+%  \mathcal{G}_{\mu \nu} = \frac{g_1}{\Lambda} \frac{1}{2} \left( i \partial_\mu \rho_\nu + \mu \leftrightarrow \nu \right) + \frac{g_{2,1}}{\Lambda^2} \frac{1}{2} \left( i \partial_\mu i \partial_\nu + \mu \leftrightarrow \nu \right) \slashed{\rho} + \frac{g_{2,2}}{\Lambda^2} \frac{1}{4} \left( i \slashed{\partial} i \partial_\mu \rho_\nu + i \partial_\mu i \slashed{\partial} \rho_\nu + \mu \leftrightarrow \nu \right) \\ + \frac{g_{3,1}}{\Lambda^3} \frac{1}{2} \left(i \partial \right)^2 \left( i \partial_\mu \rho_\nu + \mu \leftrightarrow \nu \right) + \frac{g_{3,2}}{\Lambda^3} \frac{1}{6} \left( i \slashed{\partial} i \partial_\mu i \partial_\nu + i \partial_\mu i \slashed{\partial} i \partial_\nu + i \partial_\mu i \partial_\nu i \slashed{\partial}  + \mu \leftrightarrow \nu \right) \slashed{\rho} \, ,
+%\end{multline}
+%
+%\begin{multline}
+%  \Gamma\left( P'_2 \to P V \right) = \frac{\Vert\mathbf{q}\Vert^3 m_P}{150 \pi  \Lambda ^6 m_V^2 m_{P'_2}} \Bigg(3 \Lambda ^2 g_{2,2}^2 \left(m_V^2+\Vert\mathbf{q}\Vert^2\right) \left(5 m_V^2+2 \Vert\mathbf{q}\Vert^2\right) \\
+%    -6 g_1 \Lambda^2 \left(\Lambda \sqrt{m_V^2+\Vert\mathbf{q}\Vert^2} \left(5 g_{2,2} m_V^2+2 \Vert\mathbf{q}\Vert^2 \left(g_{2,1}+g_{2,2}\right)\right)-2 \Vert\mathbf{q}\Vert^2 g_{3,2} m_V^2-g_{3,1} \left(2 \Vert\mathbf{q}\Vert^2 m_V^2+5 m_V^4\right)\right) \\
+%    +2 \Vert\mathbf{q}\Vert^4 \left(3 \Lambda ^2 g_{2,1}^2+2 g_{3,2}^2 m_V^2\right)-12 \Lambda  \Vert\mathbf{q}\Vert^2 g_{2,1} g_{3,1} m_V^2 \sqrt{m_V^2+\Vert\mathbf{q}\Vert^2} \\
+%  +6 \Lambda g_{2,2} \left(2 \Lambda  \Vert\mathbf{q}\Vert^2 g_{2,1} \left(m_V^2+\Vert\mathbf{q}\Vert^2\right)-m_V^2 \sqrt{m_V^2+\Vert\mathbf{q}\Vert^2} \left(5 g_{3,1} m_V^2+2 \Vert\mathbf{q}\Vert^2 \left(g_{3,1}+g_{3,2}\right)\right)\right) \\
+%+3 g_{3,1}^2 m_V^4 \left(5 m_V^2+2 \Vert\mathbf{q}\Vert^2\right)+12 \Vert\mathbf{q}\Vert^2 g_{3,1} g_{3,2} m_V^4+3 g_1^2 \Lambda ^4 \left(5 m_V^2+2 \Vert\mathbf{q}\Vert^2\right)\Bigg) \, ,
+%\end{multline}
+%
+%\begin{multline}
+%  \Gamma\left( P'_2 \to P^* V \right) = \frac{\Vert\mathbf{q}\Vert^3 m_{P^*}}{75 \pi  \Lambda ^6 m_V^2 m_{P'_2}} \Bigg(\Lambda ^2 g_{2,2}^2 \left(m_V^2+\Vert\mathbf{q}\Vert^2\right) \left(5 m_V^2+2 \Vert\mathbf{q}\Vert^2\right) \\
+%  +2 g_1 \Lambda ^2 \left(-\Lambda  \sqrt{m_V^2+\Vert\mathbf{q}\Vert^2} \left(5 g_{2,2} m_V^2+2 \Vert\mathbf{q}\Vert^2 \left(g_{2,1}+g_{2,2}\right)\right)+2 \Vert\mathbf{q}\Vert^2 g_{3,2} m_V^2+g_{3,1} \left(2 \Vert\mathbf{q}\Vert^2 m_V^2+5 m_V^4\right)\right) \\
+%  +2 \Vert\mathbf{q}\Vert^4 \left(\Lambda ^2 g_{2,1}^2+4 g_{3,2}^2 m_V^2\right)-4 \Lambda  \Vert\mathbf{q}\Vert^2 g_{2,1} g_{3,1} m_V^2 \sqrt{m_V^2+\Vert\mathbf{q}\Vert^2} \\
+%  +2 \Lambda  g_{2,2} \left(2 \Lambda  \Vert\mathbf{q}\Vert^2 g_{2,1} \left(m_V^2+\Vert\mathbf{q}\Vert^2\right)-m_V^2 \sqrt{m_V^2+\Vert\mathbf{q}\Vert^2} \left(5 g_{3,1} m_V^2+2 \Vert\mathbf{q}\Vert^2 \left(g_{3,1}+g_{3,2}\right)\right)\right) \\
+%  +g_{3,1}^2 m_V^4 \left(5 m_V^2+2 \Vert\mathbf{q}\Vert^2\right)+4 \Vert\mathbf{q}\Vert^2 g_{3,1} g_{3,2} m_V^4+g_1^2 \Lambda ^4 \left(5 m_V^2+2 \Vert\mathbf{q}\Vert^2\right)\Bigg) \, ,
+%\end{multline}
+%
+%\begin{equation}
+%  \Gamma\left( P^*_3 \to P V \right) = \frac{4 \Vert \mathbf{q} \Vert^7 m_P}{105 \pi \Lambda^6 m_{P_3^*}} g_{3,2}^2 \, ,
+%\end{equation}
+%
+%\begin{multline}
+%  \Gamma\left( P^*_3 \to P^* V \right) = \frac{\Vert\mathbf{q}\Vert^3 m_{P^*}}{210 \pi  \Lambda ^6 m_{P_3^*} m_V^2} \Bigg(7 \Lambda ^2 g_{2,2}^2 \left(m_V^2+\Vert\mathbf{q}\Vert^2\right) \left(5 m_V^2+2 \Vert\mathbf{q}\Vert^2\right) \\
+%    -14 g_1 \Lambda ^2 \left(\Lambda  \sqrt{m_V^2+\Vert\mathbf{q}\Vert^2} \left(5 g_{2,2} m_V^2+2 \Vert\mathbf{q}\Vert^2 \left(g_{2,1}+g_{2,2}\right)\right)-2 \Vert\mathbf{q}\Vert^2 g_{3,2} m_V^2-g_{3,1} \left(2 \Vert\mathbf{q}\Vert^2 m_V^2+5 m_V^4\right)\right) \\
+%  +2 \Vert\mathbf{q}\Vert^4 \left(7 \Lambda ^2 g_{2,1}^2+10 g_{3,2}^2 m_V^2\right)-28 \Lambda  \Vert\mathbf{q}\Vert^2 g_{2,1} g_{3,1} m_V^2 \sqrt{m_V^2+\Vert\mathbf{q}\Vert^2} \\
+%  +14 \Lambda  g_{2,2} \left(2 \Lambda  \Vert\mathbf{q}\Vert^2 g_{2,1} \left(m_V^2+\Vert\mathbf{q}\Vert^2\right)-m_V^2 \sqrt{m_V^2+\Vert\mathbf{q}\Vert^2} \left(5 g_{3,1} m_V^2+2 \Vert\mathbf{q}\Vert^2 \left(g_{3,1}+g_{3,2}\right)\right)\right)\\ 
+%  +7 g_{3,1}^2 m_V^4 \left(5 m_V^2+2 \Vert\mathbf{q}\Vert^2\right)+28 \Vert\mathbf{q}\Vert^2 g_{3,1} g_{3,2} m_V^4+7 g_1^2 \Lambda ^4 \left(5 m_V^2+2 \Vert\mathbf{q}\Vert^2\right)\Bigg) \, .
+%\end{multline}
+%
+%\paragraph{Decadimenti di $F^{\mu \nu}$}
+%\begin{equation}
+%  \mathcal{G}_{\mu \nu} = \frac{g_1}{\Lambda} \frac{1}{2} \left( i \partial_\mu \rho_\nu + \mu \leftrightarrow \nu \right) + \frac{g_{2,1}}{\Lambda^2} \frac{1}{2} \left( i \partial_\mu i \partial_\nu + \mu \leftrightarrow \nu \right) \slashed{\rho} + \frac{g_{2,2}}{\Lambda^2} \frac{1}{4} \left( i \slashed{\partial} i \partial_\mu \rho_\nu + i \partial_\mu i \slashed{\partial} \rho_\nu + \mu \leftrightarrow \nu \right) \, ,
+%\end{equation}
+%
+%\begin{align}
+%  \Gamma\left( P^{\prime *}_2 \to P V \right) &= \frac{\Vert\mathbf{q}\Vert^5 m_P}{150 \pi \Lambda^4 m_{P^{\prime *}_2}} \left(g_{2,2}-2 g_{2,1}\right)^2 \, , \\
+%  \Gamma\left( P^{\prime *}_2 \to P^* V \right) &= \frac{\Vert\mathbf{q}\Vert^5 m_{P^*}}{75 \pi \Lambda^4 m_V^2 m_{P^{\prime *}_2}} \left(\left(13 g_{2,1}^2+22 g_{2,2} g_{2,1}+12 g_{2,2}^2\right) m_V^2+5 \Vert\mathbf{q}\Vert^2 \left(g_{2,1}+g_{2,2}\right)^2\right)\, , \\
+%  \Gamma\left( P_3 \to P V \right) &= \frac{\Vert\mathbf{q}\Vert^5 m_P }{105 \pi \Lambda ^4 m_{P_3} m_V^2} \left(g_{2,1}+g_{2,2}\right)^2 \left(7 m_V^2+3 \Vert\mathbf{q}\Vert^2\right)\, , \\
+%  \Gamma\left( P_3 \to P^* V \right) &=  \frac{\Vert\mathbf{q}\Vert^5 m_{P^*}}{210 \pi  \Lambda ^4 m_{P_3} m_V^2} \left(7 \left(4 g_{2,1}^2+4 g_{2,2} g_{2,1}+3 g_{2,2}^2\right) m_V^2+8 \Vert\mathbf{q}\Vert^2 \left(g_{2,1}+g_{2,2}\right)^2\right)\, . 
+%\end{align}
+
+\begin{thebibliography}{}
+  \bibitem{book:Greiner}
+  Greiner, Walter, and Joachim Reinhardt. \textit{Field quantization.} Springer Science \& Business Media, 2013.
+  \bibitem{article:Tyutin}
+  Tyutin, I. V., and B. B. Lokhvitskii. "Charge conjugation of non-Abelian gauge fields." \textit{Soviet Physics Journal} 25.4 (1982): 346-348.
+  \bibitem{article:Luke_Manohar}
+  Luke, M. E., and Manohar, A.V. "Reparametrization Invariance Constraints on Heavy Particle Effective Field Theories." \textit{Phys. Lett. B} 286 (1992): 348.
+  \bibitem{article:Georgi}
+  Georgi, Howard. "An effective field theory for heavy quarks at low energies." \textit{Physics Letters B} 240.3-4 (1990): 447-450.
+  \bibitem{article:Casalbuoni}
+  Casalbuoni, Roberto, et al. "Light vector resonances in the effective chiral Lagrangian for heavy mesons." \textit{Physics Letters B} 292.3-4 (1992): 371-376.
+\end{thebibliography}
+
+\end{document}

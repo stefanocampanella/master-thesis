@@ -1,0 +1,206 @@
+\chapter{Spinor Degrees of Freedom and Projectors}
+
+Throughout this thesis several algebraic properties of spinors have been exploited. Given their relevance, some general remarks are recollected and presented in a systematic way in this appendix (the approach of which is taken from \cite{Steane:2013wra}).
+
+A rank 1 spinor (or Weyl spinor or simply spinor) is a two component complex vector with defined Lorentz transformation law. Spinors can belong to two different representations of the Lorentz group $SO(3,1)$, which is homomorphic to $SL(2,\symbb{C})$, i.e. the group of $2 \times 2$ unimodular matrices, which are indicated in the literature as $(1/2, 0)$ and $(0, 1/2)$. The members of the first representation are called contraspinors or right-handed while the member of the second are called cospinors or left-handed.
+
+The transformations of these two representations are the following
+\begin{align}
+  \operatorname{D}_R \colon u \mapsto \exp{\left( \frac{i}{2} (\symbf{\theta} + i \symbf{\rho}) \cdot \symbf{\sigma}\right)} u & \qquad \text{for contraspinors} \\
+  \label{eq:contraspinor_transformation}
+  \operatorname{D}_L \colon v \mapsto \exp{\left( \frac{i}{2} (\symbf{\theta} - i \symbf{\rho}) \cdot \symbf{\sigma}\right)} v & \qquad \text{for cospinors} ,
+\end{align}
+where $(\theta^i, \rho^i)$ are the parameters of the transformation (respectively the rotation angles and the rapidity vector components) and $\sigma^i$ are the Pauli matrices. Therefore, \emph{spinors of opposite chirality transform in the same way under pure rotations and in opposite way under pure boosts}. A Lorentz transformation for contraspinors is related to the transformation for cospinors with same parameters $\left( \operatorname{D}^\dagger_R \right)^{-1}$, in this way the contraction $v^\dagger u$ is Lorentz invariant (like the contractions of contravariant and covariant four-vectors).
+
+The tensorial product of two rank 1 spinor is a rank 2 spinor, and so go on. Tensors of rank $k$ can be represented as spinors of rank $2k$. However, some tensors can be represented with spinors of the rame rank. This is shown explicitly for four-vectors in the following.
+
+To begin with, notice that there is a linear isomorphism between four-vectors and Hermitian $2 \times 2$ matrices. The latter form a four-dimensional real vector space and a particularly convenient choice of a basis is $\{ \symbb{1}, \sigma^1, \sigma^2, \sigma^3 \}$
+\begin{equation}
+  X = 
+  \begin{pmatrix}
+    t + z & x - i y \\
+    x + i y & t - z
+  \end{pmatrix}
+  = t \symbb{1} + x \sigma^1 + y \sigma^2 + z \sigma^3 = \sum_\mu x^\mu \sigma^\mu ,
+\end{equation}
+with $\sigma^\mu = (\symbb{1}, \symbf{\sigma})$. These matrices belong to a representation of the (complex two-dimensional) special linear group, if $M$ is Hermitian and $\operatorname{D}_{R/L}$ belongs to $SL(2, \symbb{C})$ then $\operatorname{D}_{R/L} M \operatorname{D}^\dagger_{R/L}$ is Hermitian, which is homomorphic to $SO(3,1)$ and indeed 
+\begin{equation}
+  \det{X} = t^2 - \left( x^2 + y^2 + z^2 \right) = x_\mu x^\mu ,
+\end{equation}
+\begin{equation}
+  \det{\left( \operatorname{D}_{R/L}X \operatorname{D}^\dagger_{R/L}\right)} = \det X .
+\end{equation}
+The connection between the two groups is made apparent by the relations
+\begin{subequations}
+  \begin{align}
+    \operatorname{D}^\dagger_R \sigma^\mu \operatorname{D}_R = \sum_\nu \Lambda\indices{^\mu_\nu} \sigma^\nu \\
+    \operatorname{D}^\dagger_L \sigma^\mu \operatorname{D}_L = \sum_\nu \Lambda\indices{_\mu^\nu} \sigma^\nu 
+  \end{align}
+  \label{eq:sigma_sandwich}
+\end{subequations}
+where $\Lambda$ is the four-vector Lorentz transformations with same parameters.
+
+At this point, it is sufficient to observe that the external product
+\begin{equation}
+  u u^\dagger = \begin{pmatrix} \vert a \vert^2 & a b^* \\ a^* b & \vert b \vert^2 \end{pmatrix} , \text{ with } u = \begin{pmatrix} a \\ b \end{pmatrix} ,
+\end{equation}
+is always a Hermitian null matrix which transforms covariatly with respect to Lorentz transformations, to conclude that a spinor is always associated to a null (or light-like) four-vector
+\begin{equation}
+  V = \frac{1}{2}
+  \begin{pmatrix}
+    \vert a \vert ^2 + \vert b \vert^2 \\
+    a b^* + b a^* \\
+    i ( a b^* - b a^* ) \\
+    \vert a \vert^2 - \vert b \vert^2
+  \end{pmatrix} = \frac{1}{2}
+  \begin{pmatrix}
+    u^\dagger u \\
+    u^\dagger \symbf{\sigma} u 
+  \end{pmatrix} .
+\end{equation}
+Moreover, it can be shown that any spinor can be uniquely represented by a tuple consisting of a light-like four-vector, a phase and a sign. 
+
+Given a spinor, the associated four-vector can be extracted using the following relations 
+\begin{align}
+  V^\mu = u^\dagger \sigma^\mu u & \qquad \text{for contraspinors} \\
+  \label{eq:fourvector_from_contraspinor}
+  V_\mu = v^\dagger \sigma^\mu v & \qquad \text{for cospinors}. 
+\end{align}
+These light-like four-vectors can be interpreted as the four-velocity of massless particles. The number of available DoF's confirm this idea: in a given reference frame the four-velocity of a massless particle is determined by its direction (2 DoF's) while from a normalized Weyl spinor can be extracted a null four-vector with unitary time component (2 DoF's). 
+
+Indeed, if $u$ is a spinor and $P$ is its four-vector then
+\begin{align}
+  \left(P^0 \symbb{1} - \symbf{P} \cdot \symbf{\sigma}\right) u = 0 & \qquad \text{for contraspinors} \\
+  \left(P^0 \symbb{1} + \symbf{P} \cdot \symbf{\sigma}\right) v = 0 & \qquad \text{for cospinors} .
+\end{align}
+These equations can be interpreted as the \emph{Weyl equations} in the momentum space and describe massless spin-$1/2$ particles. For these particles the Pauli-Lubanski four-spin is proportional to the four-momentum: parallel in the case of right-handed solutions and anti-parallel in the case of left-handed solutions. For this reason, for Weyl particles, the helicity coincides with chirality. 
+
+The Pauli-Lubanski four-spin is defined by
+\begin{equation}
+  W_\mu = \frac{1}{2} \varepsilon_{\mu \nu \alpha \beta} P^\nu J^{\alpha \beta} , 
+\end{equation}
+where $J^{\alpha \beta}$ is the relativistic angular momentum tensor (the charge of the Noether current of the Lorentz symmetry). This four-vector is the covariant generalization of the non relativistic spin, indeed it is proportional to the usual spin vector in the rest frame (which does not exist for Weyl particles, being massless)
+\begin{equation}
+  \left. W \right\vert_\text{rest frame} = \left( 0 , m \symbf{S} \right) 
+\end{equation}
+and, as such, is the generator of spin rotations. Moreover, as can be seen in the rest frame, it satisfies
+\begin{equation}
+  W_\mu W^\mu = - m^2 s ( s + 1 ) \qquad W_\mu P^\mu = 0 ,
+\end{equation}
+where $s$ is the spin of the field in exam. 
+
+It is finally possible to transform a contraspinor in a cospinor and vice-versa, that is to find $\operatorname{P}$ such that
+\begin{equation}
+  \text{if } u \mapsto \operatorname{D}_Ru \text{ then } \operatorname{P} u \mapsto \left( \operatorname{D}^\dagger_R \right)^{-1} \operatorname{P} u .
+\end{equation}
+The interpretation of contraspinors and cospinors as solutions of the Weyl equation suggests that $\operatorname{P}$ is a spatial inversion. Indeed, the momentum $P^\mu$ is a polar vector while the Pauli-Lubanski four-spin $W^\mu$ is an axial one, therefore a spatial inversion transforms right-handed spinors into left-handed one and vice-versa. However, left-handed solutions of the Weyl equation correspond to negative frequency modes, that is to antiparticles. Therefore, in the case of Weyl particles, charge conjugation coincide with parity inversion. An explicit calculation shows that the form of $\operatorname{P}$ is
+\begin{equation}
+  \operatorname{P} \colon u \mapsto \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix} u^* .
+\end{equation}
+
+A bispinor (or Dirac spinor) is a vector with four complex components, thus eight real DoF's, transforming as a pair of spinors of opposite chirality. Conventionally, in the so-called chiral representation, the upper component is the right handed one, hence 
+\begin{equation}
+  \psi = \begin{pmatrix} u \\ v \end{pmatrix}, \qquad \operatorname{D}\colon \psi \mapsto 
+  \begin{pmatrix}
+    \operatorname{D}_R & 0 \\
+    0 & \left( \operatorname{D}^\dagger_R \right)^{-1} 
+  \end{pmatrix} \psi .
+\end{equation}
+The right and left-handed components of a bispinor can be projected by means of the \emph{chirality projectors}
+\begin{equation}
+  P_R = \frac{1 + \gamma^5}{2} \qquad P_L = \frac{1 - \gamma^5}{2} ,
+\end{equation}
+where $\gamma^5$ is the fifth gamma matrix, which in the chiral representation is 
+\begin{equation}
+  \gamma^5 = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix} .
+\end{equation}
+
+A naive counting of the DoF's indicates that a normalized bispinor could represent an object with linearly independent four-momentum and four-spin. Because a bispinor transforms as a pair of spinors it is possible to extract two proper light-like four-vectors from them, in this way the available DoF's are reduced to five (where the normalization condition was taken into account). Notice that the two phases left out could be used to transform non trivially a bispinor without affecting its momentum or spin
+\begin{subequations}
+  \begin{align}
+    U_R \colon \psi &\mapsto \begin{pmatrix} e^{i \alpha} & 0 \\ 0 & \symbb{1} \end{pmatrix} \psi \\
+    U_L \colon \psi &\mapsto \begin{pmatrix} \symbb{1} & 0 \\ 0 & e^{i \alpha} \end{pmatrix} \psi .
+  \end{align}
+  \label{eq:u1_chiral_transformations}
+\end{subequations}
+
+To specify the state of a particle with spin, five parameters are sufficient indeed. This can be seen in two way. First: the four-momentum and the four-spin have 8 real parameters combined, 3 of which are fixed by the respective on-shell conditions and by the orthogonality condition. Second: to specify the state of such a particle is sufficient assign its velocity (3 DoF's) and the direction (and sign) of its spin (2 DoF's).
+
+Let be $A^\mu$ and $B_\mu$ the two light-like four-vector associated with the right-handed and left-handed components of $\psi$
+\begin{equation}
+  A^\mu = u^\dagger \sigma^\mu u \qquad B_\mu = v^\dagger \sigma^\mu v ,
+\end{equation}
+then two orthogonal linear combinations can be formed
+\begin{equation}
+  V^\mu = A^\mu + B^\mu \qquad S_\mu = \frac{1}{2} \left( A_\mu - B_\mu \right),
+\end{equation}
+which can be written as
+\begin{align}
+  & V^\mu = u^\dagger \sigma^\mu u + \eta^{\mu \nu} v^\dagger \sigma^\nu v  = \psi^\dagger \gamma^0 \gamma^\mu \psi \\
+  & S_\mu = \frac{1}{2} \left( \eta_{\mu \nu} u^\dagger \sigma^\nu u - v^\dagger \sigma^\mu v \right)  = \frac{1}{2} \psi^\dagger \gamma^0 \gamma_\mu \gamma^5 \psi ,
+\end{align}
+where all gamma matrices are in the chiral representation
+\begin{equation}
+  \gamma^0 = \begin{pmatrix} 0 & \symbb{1} \\ \symbb{1} & 0 \end{pmatrix} , \qquad \gamma^i = \begin{pmatrix} 0 & - \sigma^i \\ \sigma^i & 0 \end{pmatrix} .
+\end{equation}
+
+These two four-vectors are \textbf{not necessarily} non-null, however they have opposite invariant norm and hence if one is space-like the other is time-like and vice-versa. If in some particular frame of reference holds
+\begin{equation}
+  u = v \quad \text{ or } \quad u = - v 
+  \label{eq:rest_frame_conditions}
+\end{equation}
+then $A^0 = B^0$ and $\symbf{A} = - \symbf{B}$. Therefore in this frame of reference $V^\mu$ and $S_\mu$ are suitable to be interpreted as the four-velocity and the four-spin of a particle at rest and the explicit expression of $\symbf{S}$ confirms this interpretation
+\begin{equation}
+  \symbf{S} = u^\dagger \symbf{\sigma} u .
+\end{equation}
+Once the equations for bispinorial fields are given, the two mutually exclusive possibilities \eqref{eq:rest_frame_conditions} are interpreted respectively as particles and antiparticles.
+
+However, it is important to note that the conditions \eqref{eq:rest_frame_conditions} are \textbf{not} Lorentz covariant and so are referred to a particular frame of reference (if it exists). Nonetheless, in any given frame of reference, any bispinor can always be written as a sum of bispinors each satisfying respectively the first and the second of the equations \eqref{eq:rest_frame_conditions}
+\begin{equation}
+  \psi = \begin{pmatrix} u \\ v \end{pmatrix} \equiv \begin{pmatrix} (u + v)/2 \\ (u + v)/2 \end{pmatrix} + \begin{pmatrix} (u - v)/2 \\ (v - u)/2 \end{pmatrix} .
+  \label{eq:rest_frame_decomposition}
+\end{equation}
+This decomposition can be obtained using the energy projectors, which in the given frame of reference have the form
+\begin{equation}
+  \operatorname{P}_+ = \frac{1 + \gamma^0}{2} \qquad \operatorname{P}_- = \frac{1 - \gamma^0}{2} .
+  \label{eq:energy_projectors_rest}
+\end{equation}
+Moreover, if $\psi$ represent a particle (or an antiparticle) at rest in some other frame of reference, moving with speed $\symbf{v}$ with respect to the observer, then the decomposition \eqref{eq:rest_frame_decomposition} can be used in that frame and the result can be boosted with velocity $-\symbf{v}$
+\begin{equation}
+  \psi^\prime_\pm = \operatorname{D}(-\symbf{v}) \frac{1 \pm \gamma^0}{2} \psi = \frac{1 \pm \operatorname{D}(-\symbf{v}) \gamma^0 \operatorname{D}(\symbf{v})}{2} \psi' = \frac{1 \pm v_{0 \mu} \operatorname{D}(-\symbf{v}) \gamma^\mu \operatorname{D}(\symbf{v})}{2} \psi' = \frac{1 \pm \slashed{v}}{2} \psi' 
+\end{equation}
+where $v_0 = (1,\symbf{0})$, $\psi' = \operatorname{D}(-\symbf{v}) \psi$ and were taken into account the bispinorial analogous of the relations \eqref{eq:sigma_sandwich}
+\begin{equation}
+  \operatorname{D}(-\symbf{v}) \gamma^\mu \operatorname{D}(\symbf{v}) = \Lambda\indices{^\mu_\nu}(\symbf{v}) \; \gamma^\nu .
+\end{equation}
+In this way the generalized energy projectors are introduced
+\begin{equation}
+  \operatorname{P}_\pm = \frac{1 \pm \slashed{v}}{2} 
+\end{equation}
+and the bispinors projected using these operators have indeed the right velocity
+\begin{equation}
+  V^\mu = \psi_\pm \gamma^\mu \psi_\pm = \pm v^\mu .
+\end{equation}
+
+The same approach can be used to obtain the projectors for bispinor with spin in their rest frame parallel or antiparallel to $\symbf{s}$ in an arbitrary frame of reference
+\begin{equation}
+  P_{\uparrow \downarrow} = \frac{1 \pm \slashed{v} \slashed{s} \gamma^5}{2} , \quad \text{ with } s^\mu = \Lambda\indices{^\mu_\nu} \; s_0^\nu \text{ and } s_0^\mu = (0, \symbf{s})
+\end{equation}
+and verify that bispinors projected using the latter have the right spin 
+\begin{equation}
+  S^\mu = \frac{1}{2} \psi_{\uparrow \downarrow} \gamma^\mu \gamma^5 \psi_{\uparrow \downarrow} = \pm s^\mu .
+\end{equation}
+
+The interpretation of $V$ and $S$ as four-velocity and four-spin of the bispinor can be checked against another argument. If the operator which exchange the left and the right component
+\begin{equation}
+  \operatorname{P} \colon \psi \mapsto \begin{pmatrix} 0 & \symbb{1} \\ \symbb{1} & 0 \end{pmatrix} \psi = \gamma^0 \psi
+\end{equation}
+is interpreted as the spatial inversion (or parity transformation) operator then an explicit calculation show that $\symbf{V}$ change sign, i.e. is polar, while $\symbf{S}$ remain the same, i.e. is axial. This is the expected behaviour of the velocity and spin vectors. Moreover, as can be checked in the standard representation where $\operatorname{P}$ is diagonal, particle and antiparticle bispinors are eigenstates of the parity operator respectively with eigenvalues $+1$ and $-1$.
+
+Finally, the bispinor charge conjugation operator can be introduced
+\begin{equation}
+  \operatorname{C} \colon \psi \mapsto \begin{pmatrix} 0 & \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix} \\ \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix} & 0 \end{pmatrix} \psi^*
+\end{equation}
+which simultaneously inverts the handedness of the two components and swap them. Its action is manifest in the rest frame, where it changes a particle bispinor in an antiparticle one and vice-versa.
+
+% vim: spelllang=en_gb ft=tex
